@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./login.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="login">
+      <div class="login-inner">
+        <div class="frame-parent">
+          <div class="login-wrapper">
+            <div class="login1">Admin Login</div>
+          </div>
+          <form action="/LoginAdmin" class="login-container" method="POST">
+            <input
+            class="input-fields"
+            name="email"
+            placeholder="Email"
+            type="text"
+          />
+          <br>
+          <input
+            class="input-fields1"
+            name="password"
+            placeholder="Password"
+            type="password"
+            />
+          <button class="button">
+            <div class="style-layer">
+              <div class="button1">Login</div>
+              <iconify-icon icon="maki:arrow" style="color: white;" width="15" height="15"></iconify-icon>
+            </div>
+          </button>
+        </form>
+          <div class="dont-have-an-container">
+            <p id="errorMessage" style="color: red;">
+              <%= errorMessage || '' %>
+            </p>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="image-14-parent">
+        <img class="image-14-icon" alt="" src="./public/image-14@2x.png" />
+        <div class="benefits-image-dalle">
+          <div class="brand">
+            <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="43" height="43"></iconify-icon>
+            <div class="brandname">MarketPlace</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-dashboard">
+      <main class="fluent-mdl2accept-parent">
+        <h1>Categories</h1>
+        <button class="addbutton"  onclick="showAddForm()">Add Category</button>
+
+  <!-- Popup Form Overlay -->
+<div id="addFormPopup" class="form-popup-overlay" style="display: none;">
+  <div class="form-popup">
+    <h2>Add Category</h2>
+    <form id="addForm" action="/category/add" method="post">
+      <label for="addName">Name:</label>
+      <input type="text" id="addName" name="addName" required>
+       <br>
+      <label for="addDescription">Description:</label>
+      <input type="text" id="addDesc" name="addDesc" required>
+
+      <!-- Placeholder for error messages -->
+      <div id="formError" class="form-error"></div>
+
+      <button type="submit">Add Category</button>
+      <button type="button" onclick="closeAddForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+        <table border="2">
+          <thead>
+            <tr>
+              <th>Category Id</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% categories.forEach(category => { %>
+              <tr>
+                <td><%= category.category_id %></td>
+                <td><%= category.name %></td>
+                <td><%= category.description %></td>
+                <td><%= category.status %></td>
+                <td>
+                  <form action="/category/status" method="post" style="display: inline-block; " onsubmit="return confirm('Are you sure you want to perform this action?');">
+                    <input type="hidden" name="category_id" value="<%= category.category_id %>">
+                    <input type="hidden" name="status" value="<%= category.status === 'softDeleted' ? 'Active' : 'softDeleted' %>">
+                    <button class="block-button" type="submit">
+                        <% if(category.status === 'Active') { %>
+                          <iconify-icon icon="material-symbols:delete" width="16" height="16"  style="color: black"></iconify-icon>
+                          <% } else { %>
+                            <iconify-icon icon="mdi:tick" width="16" height="16"  style="color: black"></iconify-icon>
+                          <% } %>
+                    </button>
+                </form>                
+                  <button href="#"  onclick="openEditForm('<%= category.category_id %>')"><iconify-icon icon="material-symbols:edit" width="16" height="16"  style="color: black"></iconify-icon></button>
+                        
+                  <form id="editForm<%= category.category_id %>" action="/catEdit" method="post" style="display: none;">
+                    <input type="hidden" name="categoryID" value="<%= category._id %>">
+      
+                    <label for="editName">Name:</label>
+                    <input type="text" id="editName<%= category.category_id %>" name="editName" value="<%= category.name %>" required>
+      
+                    <label for="editdesc">Description:</label>
+                    <input type="text" id="editDesc<%= category.description %>" name="editDesc" value="<%= category.description %>" required>
+            
+                    <div id="message<%= category.category_id %>"></div>
+
+                    <button type="submit">Save Changes</button>
+                    <button type="button" onclick="hideEditForm('<%= category.category_id %>')">Cancel</button>
+                  </form>
+                </td>
+              </tr>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </main> 
+      <nav class="nav">
+        <b class="admin">Admin</b>
+        <ol class="notifications-fill0-wght400-gr-wrapper">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>            
+            </button>
+        </ol>
+      </nav>
+      <section class="frame-parent">
+        <div class="line-vertical"></div>
+        <div class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToDash()">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+          <button class="products" onclick="redirectToOrders()">Order</button>
+        </div>
+        <div class="mingcutecoupon-line-parent">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>               
+          <button class="products" onclick="redirectToCoupon()">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToBanner()">Banner Management</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <a href="/signout">
+          <button class="products">Logout</button>
+          </a>
+        </div>
+        <div class="frame-item"></div>
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+        <div class="mdiuser-outline-parent">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+                <button class="products" onclick="redirectToUsers()">Users</button>
+            </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    
+    function openEditForm(categoryId) {
+  const form = document.getElementById(`editForm${categoryId}`);
+  form.onsubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('/catEdit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json(); // Parse JSON response
+
+      // Select the specific message container for this category
+      const messageDisplay = document.getElementById(`message${categoryId}`);
+      if (data.success) {
+        messageDisplay.textContent = 'Category updated successfully.';
+        messageDisplay.className = 'success-message'; // Apply success styling
+        location.reload(); // Or update the UI dynamically
+      } else {
+        // Display error message next to the form
+        messageDisplay.textContent = data.message; // Display the server error message
+        messageDisplay.className = 'error-display'; // Apply error styling
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      const messageDisplay = document.getElementById(`message${categoryId}`);
+      messageDisplay.textContent = 'Error submitting form: ' + error.message;
+      messageDisplay.className = 'error-display'; // Apply error styling
+    }
+  };
+
+  // Show the form
+  form.style.display = 'block';
+}
+
+function hideEditForm(categoryId) {
+  document.getElementById(`editForm${categoryId}`).style.display = 'none';
+}
+
+function hideAllEditForms() {
+  const editForms = document.querySelectorAll('[id^="editForm"]');
+  editForms.forEach(form => {
+    form.style.display = 'none';
+  });
+    }
+
+    function showAddForm() {
+    document.getElementById('addFormPopup').style.display = 'flex';
+    document.getElementById('formError').textContent = '';
+
+}
+
+// Function to close add form popup - remains unchanged
+function closeAddForm() {
+    document.getElementById('addFormPopup').style.display = 'none';
+}
+
+document.getElementById('addForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    try {
+        const response = await fetch('/category/add', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            alert(data.message); // Or any other success handling
+            closeAddForm();
+            location.reload();
+        } else {
+            // Display error message
+            document.getElementById('formError').textContent = data.message;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('formError').textContent = 'An error occurred, please try again.';
+    }
+});
+
+    function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+    function redirectToCoupon() {
+      window.location.href = "/admin/coupon";
+    }
+
+    
+    function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+
+  </script>
+</html>

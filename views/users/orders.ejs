@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="/global6.css" />
+    <link rel="stylesheet" href="/orders.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  </head>
+  <body>
+    <div class="profile">
+      <nav class="profile-inner">
+        <div class="icon-parent">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="24"
+            height="24"></iconify-icon>
+          <button onclick="redirectToHomepage()" class="brandname">MarketPlace</button>
+          <div class="user-wrapper">
+            <b class="user"><%= user ? user.name : 'Unknown' %></b>
+          </div>
+          <img class="group-item" alt=""
+            src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>"
+            onclick="toggleDropdown()" />
+        </div>
+      </nav>
+      <div class="dropdown-content" id="dropdown">
+        <a href="/users/userProfile">Profile</a>
+        <a href="/users/orders">Order</a>
+        <a href="/users/wallet">Wallet</a>
+        <a href="/signout">Logout</a>
+      </div>
+      <div class="rectangle-parent">
+        <div class="frame-child"></div>
+        <div class="iconamoonprofile-bold-parent">
+          <iconify-icon icon="iconamoon:profile" style="color: white;"></iconify-icon>
+          <button onclick="redirectToProfile()" class="profile3">Profile</button>
+        </div>
+        <div class="material-symbolsupload-parent">
+          <iconify-icon icon="material-symbols:upload" style="color: white;"></iconify-icon>
+          <button onclick="redirectToUploads()" class="uploads">Uploads</button>
+        </div>
+        <div class="lets-iconsorder-light-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;"></iconify-icon>
+          <button class="uploads">Orders</button>
+        </div>
+
+        <img class="frame-item" alt="" src="./public/line-12@2x.png" />
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32"
+            height="32"></iconify-icon>
+          <button class="brandname1">MarketPlace</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <a href="/signout">
+            <button class="uploads">Logout</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="frame-parent">
+        <h1>Order History</h1>
+        <h3>Buy Orders</h3>
+        <div class="table-responsive">
+          <% if (Orders.length === 0) { %>
+            <p>No orders available.</p>
+          <% } else { %>
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>Order Number</th>
+                  <th>Product Details</th>
+                  <th>Status</th>
+                  <th>Total Amount</th>
+                  <th>Order Details</th>
+                  <th>Action</th>
+                  <th>Invoice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% Orders.forEach(order => { %>
+                  <tr>
+                    <td><%= order.orderNumber %></td>
+                    <td>
+                      <ul>
+                        <% order.items.forEach(item => { %>
+                          <li>
+                            <strong>Product Name:</strong> <%= item.product_name %><br />
+                            <strong>Quantity:</strong> <%= item.quantity %>
+                          </li>
+                        <% }); %>
+                      </ul>
+                    </td>
+                    <td>
+                      <%= order.status %>
+                    </td>
+                    <td>Rs:<%= (order.total + 6.99).toFixed(2)%></td>
+                    <td><a href="/order-details/<%= order._id %>" class="view-order-button"><iconify-icon icon="carbon:view" width="15" height="15"  style="color: black"></iconify-icon></a></td>
+                    <td>
+                      <form action="/cancelOrder" method="post" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                        <input type="hidden" name="orderId" value="<%= order._id %>">
+                        <% if (order.status.toLowerCase() === 'delivered') { %>
+                            <span>Order delivered successfully!</span>
+                        <% } else if (order.status.toLowerCase() === 'failed') { %>
+                            <button type="button" onclick="payNow('<%= order._id %>')">Pay Now</button>
+                        <% } else if (order.status.toLowerCase() === 'pending') { %>
+                            <button type="submit">Cancel Order</button>
+                        <% } else { %>
+                            <span>Order Cancelled</span>
+                        <% } %>
+                    </form>
+                    
+                    </td>
+                    <td>
+                      <a href="/downloadInvoice?orderId=<%= order._id %>"><iconify-icon icon="material-symbols:download" width="15" height="15"  style="color: black"></iconify-icon></a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          <% } %>
+        </div>
+    <!-- Pagination -->
+    <div class="pagination" id="buyer-pagination">
+      <% if (hasPreviousPage) { %>
+        <a href="/users/orders?page=<%= previousPage %>">Previous</a>
+      <% } %>
+      <% for (let i = 1; i <= lastPage; i++) { %>
+        <a href="/users/orders?page=<%= i %>" <%= i === currentPage ? 'class="active"' : '' %>><%= i %></a>
+      <% } %>
+      <% if (hasNextPage) { %>
+        <a href="/users/orders?page=<%= nextPage %>">Next</a>
+      <% } %>
+    </div>
+    <div class="seller-orders">
+      <h2>Sold Orders</h2>
+      <% if (sellerOrders.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Order Number</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% sellerOrders.forEach(order => { %>
+              <% order.items.forEach(item => { %>
+                <tr>
+                  <td><%= order.orderNumber %></td>
+                  <td><%= item.product_id.name %></td>
+                  <td><%= item.quantity %></td>
+                  <td>Rs:<%= item.product_id.price %></td>
+                  <td><%= order.status %></td>
+                  <td>
+                    <% if (order.status === 'Refund') { %>
+                      <form action="/seller/refund" method="post">
+                        <input type="hidden" name="orderId" value="<%= order._id %>">
+                        <input type="hidden" name="productId" value="<%= item.product_id._id %>">
+                        <button type="submit" name="refund" value="true">Refund</button>
+                        <button type="submit" name="refund" value="false">Do Not Refund</button>
+                      </form>
+                    <% } else { %>
+                      <button disabled>No actions</button>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }); %>
+            <% }); %>
+          </tbody>
+        </table>
+    </div>
+    
+    <div class="pagination" id="seller-pagination">
+      <% if (hasPreviousPage) { %>
+        <a href="/users/orders?page=<%= previousPage %>">Previous</a>
+      <% } %>
+      <% for (let i = 1; i <= lastPage; i++) { %>
+        <a href="/users/orders?page=<%= i %>" <%= i === currentPage ? 'class="active"' : '' %>><%= i %></a>
+      <% } %>
+      <% if (hasNextPage) { %>
+        <a href="/users/orders?page=<%= nextPage %>">Next</a>
+      <% } %>
+    </div>
+    <% } else { %>
+      <div>No orders have been made.</div>
+    <% } %>
+</div>
+
+    
+    </div>
+    <script>
+
+      function redirectToProfile() {
+        window.location.href = "/users/userProfile";
+      }
+  
+      function redirectToUploads() {
+        window.location.href = "/users/uploads";
+      }
+      function redirectToHomepage() {
+  console.log("Redirecting to homepage");
+  window.location.href = "/";
+}
+
+  
+       function toggleDropdown() {
+        var dropdown = document.getElementById("dropdown");
+        dropdown.classList.toggle("show");
+      }
+      function payNow(orderId) {
+    // Send an AJAX request to fetch the order details based on orderId
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/getOrderDetails?orderId=" + orderId, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var orderDetails = JSON.parse(xhr.responseText);
+                var totalAmount = getTotalAmount(orderDetails);
+                initiateRazorpayPayment(totalAmount, orderId);
+            } else {
+                alert("Failed to fetch order details.");
+            }
+        }
+    };
+    xhr.send();
+}
+
+function getTotalAmount(orderDetails) {
+    let total = 0;
+    // Assuming orderDetails is an object containing the order details
+     total =orderDetails.total
+    return total;
+}
+  function initiateRazorpayPayment(amount, orderId) {
+      var options = {
+          "key": "rzp_test_zeV9gelrYa3j9L", // Access environment variable
+          "amount": amount * 100,
+          "currency": "INR",
+          "name": "MarketPlace",
+          "description": "Payment for Order",
+          "handler": function (response) {
+              // Handle the response after successful payment
+              console.log(response);
+              if (response.razorpay_payment_id) {
+                  updatePaymentStatus(orderId);
+              } else {
+                  // Payment failed or was canceled
+                  alert("Payment failed or was canceled.");
+              }
+          },
+          "prefill": {
+              "name": "Customer Name",
+              "email": "customer@example.com"
+          },
+          "theme": {
+              "color": "#3399cc"
+          }
+      };
+      var rzp = new Razorpay(options);
+      rzp.open();
+  }
+  
+
+  function updatePaymentStatus(orderId) {
+      // Send an AJAX request to update the payment status to "Pending"
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/updatePaymentStatus", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+              if (xhr.status === 200) {
+                  alert("Payment successful. Status updated to Pending.");
+              } else {
+                  alert("Failed to update payment status.");
+              }
+          }
+      };
+      xhr.send(JSON.stringify({ orderId: orderId }));
+  }
+  
+  
+      </script>
+    </body>
+  </html>

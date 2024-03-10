@@ -1,0 +1,602 @@
+.b {
+    font-family: var(--open-sans-regular-16);
+  }
+  .visiata-systems-international {
+    font-weight: 600;
+    color: var(--color-royalblue);
+  }
+  .all-rights-reserved-container {
+    position: absolute;
+    bottom: -1190px;
+    left: calc(50% - 259px);
+    text-decoration: underline;
+    text-align: center;
+    color: inherit;
+  }
+  .icon {
+    position: absolute;
+    top: 12.5px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+  }
+  .brandname {
+    position: absolute;
+    top: 14px;
+    left: 32px;
+    line-height: 150%;
+    font-weight: 600;
+  }
+  .vector-icon {
+    position: absolute;
+    height: 83.44%;
+    width: 66.56%;
+    top: 8.44%;
+    right: 16.88%;
+    bottom: 8.13%;
+    left: 16.56%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  
+  .group-child {
+    position: absolute;
+    top: 8.5px;
+    left: 350.5px;
+    border-radius: 50%;
+    background-color: var(--color-firebrick);
+    border: 1px solid var(--pure-white);
+    box-sizing: border-box;
+    width: 8px;
+    height: 8px;
+  }
+  .notifications-fill0-wght400-gr-parent {
+    position: absolute;
+    top: 8.5px;
+    left: 1076.3px;
+    width: 358.5px;
+    height: 32px;
+  }
+  .user,
+  .user-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .user-wrapper {
+    top: 15px;
+    left: 1188px;
+    width: 37px;
+    height: 19px;
+    font-size: var(--open-sans-regular-16-size);
+    color: var(--heading);
+  }
+  .group-item {
+    position: absolute;
+    top: 0;
+    left: 1126px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  .icon-parent {
+    position: relative;
+    width: 100%;
+    height: 50px;
+  }
+  .profile-inner {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 1px;
+    background-color: var(--dominenent);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-81xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--open-sans-semibold-14-size);
+    color: var(--colors-accent);
+    font-family: var(--copy-button);
+  }
+  .profile-child {
+    position: absolute;
+    top: 97px;
+    left: 362px;
+    border-radius: 1px;
+    width: 255px;
+    height: 236px;
+    object-fit: fit;
+  }
+  .profile2 {
+    position: absolute;
+    top: 366px;
+    left: 310px;
+    font-size: var(--rubik-32-size);
+    font-weight: 600;
+    font-family: var(--rubik-32);
+  }
+  .vector-icon1 {
+    position: absolute;
+    height: 83.33%;
+    width: 83.33%;
+    top: 8.33%;
+    right: 8.33%;
+    bottom: 8.33%;
+    left: 8.33%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .material-symbolscancel {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    top: 738px;
+    left: 633px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+  }
+  .vector-icon2 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .teenyiconstick-circle-solid {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    top: 740px;
+    left: 661px;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+  }
+  .frame-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-gray-300);
+    box-shadow: var(--nav);
+    width: 280px;
+    height: 100%;
+  }
+  .iconamoonprofile-bold {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .profile3 {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    font-size: var(--open-sans-regular-16-size);
+    font-weight: 700;
+    font-family: var(--copy-button);
+    color: var(--wh-heading);
+    text-align: left;
+    display: inline-block;
+  }
+  .iconamoonprofile-bold-parent {
+    position: absolute;
+    top: 96px;
+    left: 24px;
+    width: 232px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-5xs) 0;
+    box-sizing: border-box;
+    gap: var(--gap-xs);
+  }
+  .uploads {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    font-size: var(--open-sans-regular-16-size);
+    font-family: var(--copy-button);
+    color: var(--wh-content);
+    text-align: left;
+    display: inline-block;
+  }
+  .lets-iconsorder-light-parent,
+  .material-symbolsfavorite-outl-parent,
+  .material-symbolsupload-parent {
+    position: absolute;
+    top: 160px;
+    left: 24px;
+    width: 232px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-5xs) 0;
+    box-sizing: border-box;
+    gap: var(--gap-xs);
+  }
+  .lets-iconsorder-light-parent,
+  .material-symbolsfavorite-outl-parent {
+    top: 224px;
+    align-items: flex-end;
+  }
+  .material-symbolsfavorite-outl-parent {
+    top: 288px;
+  }
+  .frame-item {
+    position: absolute;
+    top: 50px;
+    left: 1px;
+    width: 286.5px;
+    height: 0;
+    object-fit: cover;
+  }
+  .icon1 {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+  }
+  .brandname1 {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    font-size: var(--rubik-24-size);
+    line-height: 150%;
+    font-weight: 600;
+    font-family: var(--copy-button);
+    color: var(--wh-heading);
+    text-align: left;
+    display: inline-block;
+  }
+  .brand,
+  .epsetting-parent,
+  .material-symbolslogout-parent {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    box-sizing: border-box;
+  }
+  .brand {
+    top: 10px;
+    left: 34px;
+    width: 225px;
+    height: 41px;
+    align-items: center;
+    padding: 0 var(--padding-5xs);
+    gap: var(--gap-5xs);
+  }
+  .epsetting-parent,
+  .material-symbolslogout-parent {
+    top: 919px;
+    left: 24px;
+    width: 232px;
+    align-items: flex-end;
+    padding: var(--padding-5xs) 0;
+    gap: var(--gap-xs);
+  }
+  .material-symbolslogout-parent {
+    top: 963px;
+  }
+  .rectangle-parent,
+  .vector-icon3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    overflow: hidden;
+  }
+  .vector-icon3 {
+    height: 1.55%;
+    width: 1.25%;
+    top: 32.62%;
+    right: 52.71%;
+    bottom: 65.83%;
+    left: 46.04%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .button1 {
+    position: relative;
+    font-size: var(--open-sans-semibold-14-size);
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: var(--rubik-32);
+    color: var(--pure-white);
+    text-align: left;
+  }
+  .style-layer {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-5xs) var(--padding-base);
+    background-color: var(--dark-gray);
+    align-self: stretch;
+    border-radius: var(--br-5xs);
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .button,
+  .frame-inner {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .button {
+    top: 762px;
+    left: 739px;
+    width: 151px;
+    height: 47px;
+  }
+  .frame-inner {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    top: 0;
+    left: 112px;
+    width: 240px;
+  }
+  .helper-text-here {
+    align-self: stretch;
+    position: relative;
+    display: none;
+  }
+  .helper-text-here-wrapper {
+    position: absolute;
+    top: 112px;
+    left: 112px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frame-parent,
+  .profile1 {
+    position: absolute;
+    overflow: hidden;
+  }
+  .frame-parent {
+    top: 55px;
+    left: 300px;
+    overflow-x: auto; /* Allows table to scroll on small screens */
+    margin: 0;
+    padding: 0;
+    height: 90%;
+    width: 920px; /* Adjusts to the width of its contents */  
+    font-size: var(--regular-12-size);
+    font-family: var(--regular-12);
+  }
+  .profile1 {
+    top: 0;
+    left: 0;
+    background-color: var(--color-whitesmoke-100);
+    width: 1440px;
+    height: 1024px;
+  }
+  .profile {
+    position: relative;
+    width: 100%;
+    height: 1024px;
+    text-align: left;
+    font-size: var(--open-sans-regular-16-size);
+    color: var(--dark-gray);
+    font-family: var(--open-sans-regular-16);
+  }
+  .profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between items as needed */
+    position: relative; /* Add this to make the edit form absolute relative to this container */
+}
+
+.profile-item {
+    flex: 1 1 300px; /* Adjust the width of each item as needed */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.profile-item2{
+  position: absolute;
+  left: 10px;
+  top:0px
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#editForm {
+    display: none;
+    position: absolute;
+    left: 280px;
+    top : 400px;
+    max-width: 300px;
+    margin: 20px auto; /* Center the form horizontally with margin */
+    padding: 20px;
+    border: 1px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#editForm input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#editForm button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    background-color:black;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#editForm button:hover {
+    background-color: #2980b9;
+}
+
+ 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+
+/* Responsive table fonts and cell padding */
+@media (max-width: 768px) {
+  th, td {
+    padding: 4px;
+    font-size: 0.8em;
+  }
+}
+/* Adjust column widths with more content */
+.column-order-number, .column-buyer, .column-address, .column-product-details {
+  min-width: 120px; /* Adjust as needed */
+}
+
+.column-total, .column-status, .column-payment-method, .column-order-date, .column-actions, .column-invoice {
+  min-width: 80px; /* Adjust as needed */
+}
+
+/* Ensure the rest of your styles are properly defined and included */
+
+
+/* Additional media queries can be added for finer control at different screen sizes */
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 1236px;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination a {
+  color: #333; /* Text color */
+  padding: 2px 6px; /* Padding around the links */
+  text-decoration: none; /* Remove default underline */
+  border: 1px solid #ccc; /* Border around the links */
+  margin: 0 4px; /* Margin between links */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.pagination a.active {
+  background-color: #007bff; /* Background color for active link */
+  color: #fff; /* Text color for active link */
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0; /* Background color on hover */
+}
+
+
+
+
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+ th,td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  color: #333;
+}
+ th {
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+}
+ tbody tr:hover {
+  background-color: #f9f9f9;
+}
+ img {
+  width: 40px;
+  height: auto;
+  border-radius: 4px;
+  margin-right: 10px;
+ }
+
+ body{
+  height: 100%;
+ }

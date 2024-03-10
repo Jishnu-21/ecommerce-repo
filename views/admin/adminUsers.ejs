@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-dashboard">
+      <main class="fluent-mdl2accept-parent">
+        <h1>Users </h1>
+        <table border="2">
+          <thead>
+            <tr>
+              <th>User Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>User details</th>
+              <th>Status</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+              <tr>
+                <td><%= user.userID %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><a href="/user-details/<%= user._id %>" class="view-user-button">View User</a></td>
+                <td><%= user.status %></td>
+                <td>
+                  <form action="/admin/status" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to perform this action?');">
+                    <input type="hidden" name="userId" value="<%= user.userID %>">
+                    <input type="hidden" name="status" value="<%= user.status === 'Blocked' ? 'Unblocked' : 'Blocked' %>">
+                    <button class="block-button" type="submit"><%= user.status === 'Blocked' ? 'Unblock' : 'Block' %></button>
+                  </form>
+                </td>
+              </tr>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </main> 
+      <nav class="nav">
+        <b class="admin">Admin</b>
+        <ol class="notifications-fill0-wght400-gr-wrapper">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>                     
+            </button>
+        </ol>
+      </nav>
+      <section class="frame-parent">
+        <div class="line-vertical"></div>
+        <div class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToDash()">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+          <button class="products" onclick="redirectToOrders()">Orders</button>
+        </div>
+        <div class="mingcutecoupon-line-parent">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>                             
+          <button class="products" onclick="redirectToCoupons()">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToBanner">Banner Management</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+                <a href="/signout">
+          <button class="products">Logout</button>
+          </a>
+        </div>
+        <div class="frame-item"></div>
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+
+        <div class="mdiuser-outline-parent">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+                <button class="products" onclick="redirectToUsers()">Users</button>
+            </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+    function redirectToCoupons() {
+      window.location.href = "/admin/coupon";
+    }
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+
+    
+    function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+  </script>
+</html>

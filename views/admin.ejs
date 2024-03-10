@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-dashboard">
+      <main class="fluent-mdl2accept-parent">
+
+        <div class="metrics-container">
+          <!-- Total Sales -->
+          <div class="metric-card">
+            <h3>Total Sales</h3>
+            <p>$<%= totalSales %></p>
+          </div>
+        
+          <!-- Total Orders -->
+          <div class="metric-card">
+            <h3>Total Orders</h3>
+            <p><%= totalOrders %></p>
+          </div>
+        
+          <!-- Total Users -->
+          <div class="metric-card">
+            <h3>Total Users</h3>
+            <p><%= totalUsers %></p>
+          </div>
+        </div>
+
+
+     
+        <h3>Approval Pendings</h3>
+        <% if (products.length > 0) { %>
+          <table border="2">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>User name</th>
+                <th>Price</th>
+                <th>Action</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <% products.forEach(product => { %>
+                <tr>
+                  <td><img class="productimg" alt="Product Image" src="/<%= product.images[0].path.replace(/\\/g, '/') %>" /></td>
+                  <td><%= product.name %></td>
+                  <td><%= product.seller_name %></td>
+                  <td>$<%= product.price.toFixed(2) %></td>
+                  <td>
+                    <form action="/product/approval" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to set the product to active?');">
+                      <input type="hidden" name="product_id" value="<%= product._id %>">
+                      <input type="hidden" name="status" value="Active">
+                      <button class="icon-button activate-button" type="submit">
+                        <iconify-icon icon="ic:round-check-circle" width="24" height="24"></iconify-icon>
+                      </button>
+                    </form>
+                    <form action="/product/delete" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete the product?');">
+                      <input type="hidden" name="product_id" value="<%= product._id %>">
+                      <button class="icon-button delete-button" type="submit">
+                        <iconify-icon icon="ic:round-delete" width="24" height="24"></iconify-icon>
+                      </button>
+                    </form>
+                    
+                  </td>
+                </tr>        
+              <% }); %>
+            </tbody>
+          </table>
+        <% } else { %>
+          <p>No pending approvals.</p>
+        <% } %>
+        
+
+
+
+
+
+
+
+
+
+
+
+      </main>
+      <nav class="nav">
+        <b class="admin">Admin</b>
+        <ol class="notifications-fill0-wght400-gr-wrapper">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>
+          </button>
+        </ol>
+      </nav>
+      <section class="frame-parent">
+        <div class="line-vertical"></div>
+        <div class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                              
+          <button class="products" onclick="redirectToOrders()">Orders</button>
+        </div>
+        <div class="mingcutecoupon-line-parent">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>              
+          <button class="products" onclick="redirectToCoupons()">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products">Banner Management</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <a href="/signout">
+          <button class="products">Logout</button>
+          </a>
+        </div>
+        <div class="frame-item"></div>
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+        <div class="mdiuser-outline-parent">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+                <button class="products" onclick="redirectToUsers()">Users</button>
+              </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+    function redirectToCoupons() {
+      window.location.href = "/admin/coupon";
+    }
+    function redirectToCategory() {
+      window.location.href = "/admin/category";
+    }
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+  </script>
+</html>

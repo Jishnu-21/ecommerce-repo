@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-dashboard">
+      <main class="fluent-mdl2accept-parent">
+        <h1>Coupons</h1>
+        <button class="addbutton"  onclick="showAddForm()">Add Coupon</button>
+
+<!-- Add Coupon Modal -->
+<div id="addCouponModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="hideAddForm()">&times;</span>
+    <h2>Add Coupon</h2>
+    <form id="addCouponForm">
+      <label for="couponCode">Coupon code:</label>
+      <input type="text" id="couponCode" name="addName" required>
+       <br>
+      <label for="couponDesc">Description:</label>
+      <input type="text" id="couponDesc" name="addDesc" required>
+       <br>
+      <label for="discountPercentage">Discount Percentage:</label>
+      <input type="number" id="discountPercentage" name="discount" required>
+      <br>
+      
+      <label for="editdesc">Minimum price:</label>
+      <input type="number" id="minPrice"  name="minPrice" required>
+
+      <label for="editdesc">Expire Date:</label>
+      <input type="date" id="expDate"  name="expDate" required>
+
+      <div id="couponFormError" class="form-error"></div>
+
+      <button type="submit">Add Coupon</button>
+      <button type="button" onclick="hideAddForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+        <table border="2">
+          <thead>
+            <tr>
+              <th>Coupon id</th>
+              <th>Coupon Code</th>
+              <th>Description</th>
+              <th>Discount Pecrcentage</th>
+              <th>Min. Price</th>
+              <th>Expire Date</th>
+              <th>Status</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% coupons.forEach(coupon => { %>
+              <tr>
+                <td><%= coupon.coupon_id %></td>   
+                <td><%= coupon.code %></td>
+                <td><%= coupon.description %></td>
+                <td><%= coupon.discount %>%</td>
+                <td>Rs:<%= coupon.minimumPrice %></td>
+                <td><%= coupon.expireDate.toISOString().split('T')[0]%></td>
+                <td><%= coupon.status %></td>
+                <td>
+                  <form action="/coupon/status" method="post" style="display: inline-block; " onsubmit="return confirm('Are you sure you want to perform this action?');">
+                    <input type="hidden" name="coupon_id" value="<%= coupon.coupon_id %>">
+                    <input type="hidden" name="status" value="<%= coupon.status === 'softDelete' ? 'Active' : 'softDeleted' %>">
+                    <button class="block-button" type="submit">
+                      <% if(coupon.status === 'Active') { %>
+                        <iconify-icon icon="material-symbols:delete" width="16" height="16"  style="color: black"></iconify-icon>
+                        <% } else { %>
+                          <iconify-icon icon="mdi:tick" width="16" height="16"  style="color: black"></iconify-icon>
+                        <% } %>
+                  </button>
+                  </form>
+                  <button href="#"  onclick="openEditForm('<%= coupon.coupon_id %>')">Edit</button>
+                  <form id="editForm<%= coupon.coupon_id %>" class="edit-form" action="/coupon/edit" method="post" style="display: none;">
+                    <input type="hidden" name="couponId" value="<%=coupon._id %>">
+      
+                    <label for="editName">Name:</label>
+                    <input type="text" id="editName<%= coupon.coupon_code %>" name="editName" value="<%= coupon.code %>" required>
+      
+                    <label for="editdesc">Description:</label>
+                    <input type="text" id="editDesc<%= coupon.description %>" name="editDesc" value="<%= coupon.description %>" required>
+
+                    <label for="editdesc">Discount:</label>
+                    <input type="number" id="editDiscount<%= coupon.discount %>" name="discount" value="<%= coupon.discount %>" required>
+
+                    <label for="editdesc">Minimum price:</label>
+                    <input type="number" id="editDiscount<%= coupon.minimumPrice %>" name="minPrice" value="<%= coupon.minimumPrice %>" required>
+
+                    <label for="editdesc">Expire Time:</label>
+                    <input type="date" id="editDiscount<%= coupon.expireDate %>" name="expDate" value="<%= coupon.expireDate %>" required>
+
+
+                    <div id="editError<%= coupon.coupon_id %>" class="form-error"></div> <!-- Error message placeholder -->
+
+                    <button type="submit">Save Changes</button>
+                    <button type="button" onclick="hideEditForm('<%= coupon.coupon_id %>')">Cancel</button>
+                  </form>
+                </td>
+              </tr>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </main> 
+      <nav class="nav">
+        <b class="admin">Admin</b>
+        <ol class="notifications-fill0-wght400-gr-wrapper">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>            
+            </button>
+        </ol>
+      </nav>
+      <section class="frame-parent">
+        <div class="line-vertical"></div>
+        <div class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToDash()">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+          <button class="products" onclick="redirectToOrders()">Orders</button>
+        </div>
+        <div class="mingcutecoupon-line-parent">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>               
+          <button class="products">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToBanner()">Banner Management</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <a href="/signout">
+          <button class="products">Logout</button>
+          </a>
+        </div>
+        <div class="frame-item"></div>
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+        <div class="mdiuser-outline-parent">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+                <button class="products" onclick="redirectToUsers()">Users</button>
+            </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+    
+    
+    function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+
+
+
+    function openEditForm(couponId) {
+  const form = document.getElementById(`editForm${couponId}`);
+  const errorMessageDisplay = document.getElementById(`editError${couponId}`); // Correctly reference the error message placeholder
+  
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('/coupon/edit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Coupon updated successfully.');
+        location.reload(); // Or any other logic to refresh the list
+      } else {
+        errorMessageDisplay.textContent = data.message; // Use the correct element for displaying the error
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      errorMessageDisplay.textContent = 'Error submitting form: ' + error.message; // Use the correct element for displaying the error
+    }
+  };
+
+  // Show the form
+  form.style.display = 'block';
+}
+
+function hideEditForm(couponId) {
+  document.getElementById(`editForm${couponId}`).style.display = 'none';
+}
+
+function hideAllEditForms() {
+  const editForms = document.querySelectorAll('[id^="editForm"]');
+  editForms.forEach(form => {
+    form.style.display = 'none';
+  });
+
+}
+
+document.getElementById('addCouponForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    const formData = new FormData(this); // 'this' refers to the form
+    // Clear existing error messages
+    document.getElementById('couponFormError').textContent = ''; 
+    try {
+        const response = await fetch('/coupon/add', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json(); // Assuming the server responds with JSON
+        if (data.success) {
+            alert('Coupon added successfully.'); // Success feedback
+            hideAddForm(); // Close the modal
+            location.reload(); // Reload the page to show the new coupon or update the UI accordingly
+        } else {
+            // Set error message from server response
+            document.getElementById('couponFormError').textContent = data.message;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        // Set generic error message if exception occurs
+        document.getElementById('couponFormError').textContent = 'An error occurred, please try again.';
+    }
+});
+
+
+// Function to show the modal
+function showAddForm() {
+  document.getElementById('addCouponModal').style.display = 'block';
+  document.getElementById('couponFormError').textContent = '';
+
+}
+
+// Function to hide the modal
+function hideAddForm() {
+  document.getElementById('addCouponModal').style.display = 'none';
+}
+
+  </script>
+</html>

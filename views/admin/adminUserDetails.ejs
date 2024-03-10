@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global59.css" />
+    <link rel="stylesheet" href="/admin-user-details.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial Rounded MT Bold:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;600&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  </head>
+  <body>
+    <div class="admin-user-details">
+      <section class="rectangle-parent14">
+        <div class="frame-child29"></div>
+        <button class="akar-iconsdashboard-parent2" onclick="redirectToDash()">
+            <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+
+          <div class="dashboard4">Dashboard</div>
+        </button>
+        <button class="fluent-mdl2product-parent4" onclick="redirectToProducts()">
+            <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <div class="products4">Products</div>
+        </button>
+        <button class="mdiuser-outline-container" onclick="redirectToUsers()">
+            <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+
+          <b class="products4">Users</b>
+          <div class="akar-iconsdashboard4"></div>
+        </button>
+        <button class="icon-park-outlinesales-report-parent2" onclick="redirectToOrders()">
+            <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+            
+
+          <div class="products4">Order</div>
+        </button>
+        <button class="mingcutecoupon-line-parent2" onclick="redirectToCoupons()">
+            <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>               
+          <div class="products4">Coupons/Promos</div>
+        </button>
+        <button class="iconamooncategory-parent2" onclick="redirectToCategory()">
+            <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <div class="products4">Category Management</div>
+        </button>
+        <button class="material-symbolsplanner-banne-parent3">
+            <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <div class="products4" onchange="redirectToBanner()">Banner Management</div>
+        </button>
+        <div class="material-symbolslogout-parent9">
+            <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <div class="edit">Logout</div>
+        </div>
+        <div class="frame-child30"></div>
+      </section>
+      <nav class="nav4">
+        <div class="nav-child4"></div>
+        <iconify-icon icon="iconamoon:notification-light"></iconify-icon>            
+
+        <div class="admin-frame">
+          <b class="admin4">Admin</b>
+        </div>
+        <iconify-icon icon="iconamoon:notification-light"></iconify-icon>            
+    </nav>
+      <div class="brand23">
+        <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+
+        <div class="brandname35">MarketPlace</div>
+      </div>
+
+      <div class="content24">
+        <div class="left-col">
+          <div class="user-detail">
+            <div class="photo-name">
+              <div class="avatar">
+                <img class="photo-icon" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+            </div>
+              <div class="name-status">
+                <div class="text137"> <%= user.name %></div>
+                <div class="status2"></div>
+              </div>
+            </div>
+            <img class="divider-icon2" alt="" src="./public/divider.svg" />
+
+            <img
+              class="background-icon"
+              alt=""
+              src="/pexels-photo-2693212.png"
+            />
+
+            <div class="details4">
+              <div class="detail8">
+                <div class="bagde11">
+                    <iconify-icon icon="material-symbols:note"></iconify-icon>
+                </div>
+                <div class="text138">
+                  <div class="text139">User ID</div>
+                  <div class="text140"> <%= user.userID %></div>
+                </div>
+              </div>
+              <div class="detail8">
+                <div class="bagde11">
+                    <iconify-icon icon="ic:baseline-email"></iconify-icon>
+
+                </div>
+                <div class="text138">
+                  <div class="text139">Email</div>
+                  <div class="text140"> <%= user.email %></div>
+                </div>
+              </div>
+              <div class="detail8">
+                <div class="bagde11">
+                    <iconify-icon icon="material-symbols:home-outline"></iconify-icon>
+                </div>
+                <div class="text138">
+                  <div class="text139">Address</div>
+                  <div class="text140">
+                    <%= user.address %>
+                  </div>
+                </div>
+              </div>
+              <div class="detail8">
+                <div class="bagde11">
+                    <iconify-icon icon="ic:outline-phone"></iconify-icon>
+                </div>
+                <div class="text138">
+                  <div class="text139">Phone Number</div>
+                  <div class="text140"> <%= user.phone %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="statistic-cards">
+            <div class="statistic-card">
+              <div class="title-numbers">
+                <div class="title-numbers1">
+                  <div class="text156">Total Revenue</div>
+                  <div class="text157">Rs <%= sellerSalesInfo.totalRevenue.toFixed(2) %></div>
+                </div>
+              </div>
+            </div>
+            <div class="statistic-card">
+              <div class="title-numbers">
+                <div class="title-numbers1">
+                  <div class="text156">Products Listed</div>
+                  <div class="text157"><%= productsListed %></div>
+                </div>
+              </div>
+            </div>
+            <div class="statistic-card">
+              <div class="title-numbers">
+                <div class="title-numbers1">
+                  <div class="text156">Products Sold</div>
+                  <div class="text157"> <%= sellerSalesInfo.totalQuantity %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% if (products && products.length > 0) { %>
+            <div class="orders13">
+              <div class="header9">
+                <div class="title11">
+                  <div class="text162">User Products</div>
+                </div>
+              </div>
+              <div class="table2">
+                <table class="product-table">
+                  <thead>
+                    <tr>
+                      <th>Product ID</th>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% products.forEach(function(product) { %>
+                      <tr>
+                        <td><%= product.product_id %></td>
+                        <td>
+                          <img src="/<%= product.images[0].path %>" alt="<%= product.name %>">
+                          <%= product.name %>
+                        </td>
+                        <td>Rs: <%= product.price.toFixed(2) %></td>
+                        <td><%= new Date(product.created_at).toLocaleDateString("en-US") %></td>
+                        <td>
+                          <form action="/product/status" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to perform this action?');">
+                            <input type="hidden" name="product_id" value="<%= product.product_id %>">
+                            <input type="hidden" name="status" value="<%= product.status === 'softDeleted' ? 'Active' : 'softDeleted' %>">
+                            <button class="block-button" type="submit">
+                              <%= product.status === 'softDeleted' ? 'Activate' : 'Soft Delete' %>
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% } %>
+          
+        </div>
+      </div>
+      <div class="user-profile">User Profile</div>
+    </div>
+  </body>
+  <script>
+          function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+   
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+    function redirectToCoupons() {
+      window.location.href = "/admin/coupon";
+    }
+   
+    
+    function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+
+  </script>
+</html>

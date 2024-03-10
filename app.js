@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -6,16 +7,23 @@ const session = require('express-session');
 const passport = require('passport');
 const configPassport = require('./config/passport-config'); // Adjust the path accordingly
 const morgan = require('morgan');
-const Razorpay = require('razorpay');
 const multer = require('multer')
 const flash = require('connect-flash');
+const cron = require('node-cron');
+const razorpay = require('razorpay');
+
 
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost:27017/userData');
+console.log(process.env.Mongo_URI)
+mongoose.connect(process.env.Mongo_URI).then(() => {
+  console.log("Connected to MongoDB Atlas");
+}).catch((error) => {
+  console.error("Error connecting to MongoDB Atlas", error.message);
+});
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -38,9 +46,9 @@ app.use(session({
 app.use(flash());
 
 
-const razorpay = new Razorpay({
-  key_id: 'RZR_KEY_ID',
-  key_secret: 'RZR_KEY_SECRET',
+const instance = new razorpay({
+  key_id: process.env.RZR_ID_KEY,  // Access environment variable securely
+  key_secret: process.env.RZR_SECRET_KEY
 });
 
 app.use(passport.initialize());
@@ -55,6 +63,7 @@ app.use((req, res, next) => {
 // Set up middleware
 
 app.use(express.json());
+
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -81,4 +90,29 @@ app.use('/', userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+
+cron.schedule('0 0 * * *', async () => {
+  console.log('Running a task every day at midnight to check coupon expiration dates');
+  
+  const now = new Date();
+  
+  // Find coupons where expireDate is less than the current date and status is 'Active'
+  const expiredCoupons = await Coupon.find({
+    expireDate: { $lt: now },
+    status: 'Active'
+  });
+
+  // Update the status of all expired coupons to 'Inactive'
+  if (expiredCoupons.length > 0) {
+    await Promise.all(expiredCoupons.map(async (coupon) => {
+      coupon.status = 'Inactive';
+      await coupon.save();
+    }));
+    
+    console.log(`Updated ${expiredCoupons.length} coupons to 'Inactive' status.`);
+  } else {
+    console.log('No expired coupons found.');
+  }
 });

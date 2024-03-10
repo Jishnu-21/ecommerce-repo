@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-lato: Lato;
+  --text-m-medium: "Public Sans";
+  --copy-button: Inter;
+  --font-open-sans: "Open Sans";
+  --font-poppins: Poppins;
+
+  /* font sizes */
+  --text-xl-semibold-size: 18px;
+  --text-s-regular-size: 12px;
+  --text-m-medium-size: 14px;
+  --font-size-base: 16px;
+  --font-size-5xl: 24px;
+  --display-s-semibold-size: 20px;
+  --font-size-13xl: 32px;
+
+  /* Colors */
+  --color-whitesmoke-100: #f8f8f8;
+  --neutral-gray-gray-50: #f0f1f3;
+  --color-whitesmoke-200: #f0f0f0;
+  --wh-content: #ececec;
+  --neutral-white: #fff;
+  --neutral-gray-gray-25: #000;
+  --color-snow-100: #fff9f9;
+  --color-snow-200: #fff8f8;
+  --color-gainsboro-100: #e7e7e7;
+  --neutral-gray-gray-100: #e0e2e7;
+  --color-ghostwhite: #f9f9fc;
+  --neutral-black-black-300: #777980;
+  --dark-gray: #232321;
+  --color-gray-100: #1d1f2c;
+  --colors-accent: #14110b;
+  --color-gray-200: #101010;
+  --neutral-gray-gray-400: #858d9d;
+  --color-dimgray: #6d6c6c;
+  --wh-heading: #f2fff5;
+  --color-honeydew-100: #e7f7ee;
+  --color-darkslategray-100: #475569;
+  --content: #474747;
+  --dominenent: #3e3e3e;
+  --heading: #3b3b3b;
+  --neutral-gray-gray-500: #667085;
+  --secondary-green-green-50: #e9faf7;
+  --secondary-green-green-600: #1a9882;
+  --color-green: #0d8800;
+  --colors-secondary: #f5f1e9;
+
+  /* Gaps */
+  --gap-sm: 14px;
+  --gap-9xs: 4px;
+  --gap-base: 16px;
+  --gap-xs: 12px;
+  --gap-5xs: 8px;
+  --gap-11xs: 2px;
+  --gap-5xl: 24px;
+
+  /* Paddings */
+  --padding-5xs: 8px;
+  --padding-5xl: 24px;
+  --padding-3xs: 10px;
+  --padding-xs: 12px;
+  --padding-sm: 14px;
+  --padding-base: 16px;
+  --padding-lg: 18px;
+  --padding-3xl: 22px;
+  --padding-29xl: 48px;
+  --padding-mini-5: 14.5px;
+  --padding-21xl: 40px;
+
+  /* Border radiuses */
+  --br-5xs: 8px;
+  --br-21xl: 40px;
+  --br-xs: 12px;
+  --br-base: 16px;
+  --br-9xs: 4px;
+
+  /* Effects */
+  --soft-shadow: 0px 4px 30px rgba(46, 45, 116, 0.05);
+  --nav: 0px 4px 20px rgba(7, 42, 200, 0.05);
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Assuming Inter is the primary font */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

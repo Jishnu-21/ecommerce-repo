@@ -1,0 +1,511 @@
+.icon {
+    position: absolute;
+    top: 12.5px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+  }
+  .brandname {
+    position: absolute;
+    top: 14px;
+    left: 32px;
+    line-height: 150%;
+    font-weight: 600;
+  }
+  .vector-icon {
+    position: absolute;
+    height: 83.44%;
+    width: 66.56%;
+    top: 8.44%;
+    right: 16.88%;
+    bottom: 8.13%;
+    left: 16.56%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .notifications-fill0-wght400-gr {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+  }
+  .group-child {
+    position: absolute;
+    top: 8.5px;
+    left: 350.5px;
+    border-radius: 50%;
+    background-color: var(--color-firebrick);
+    border: 1px solid var(--pure-white);
+    box-sizing: border-box;
+    width: 8px;
+    height: 8px;
+  }
+  .notifications-fill0-wght400-gr-parent {
+    position: absolute;
+    top: 8.5px;
+    left: 1076.3px;
+    width: 358.5px;
+    height: 32px;
+  }
+  .user,
+  .user-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .user-wrapper {
+    top: 15px;
+    left: 1188px;
+    width: 37px;
+    height: 19px;
+    font-size: var(--font-size-base);
+    color: var(--heading);
+  }
+  .group-item {
+    position: absolute;
+    top: 0;
+    left: 1126px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  .icon-parent {
+    position: relative;
+    width: 1434.8px;
+    height: 50px;
+  }
+  .favorites-inner {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--dominenent);
+    width: 1439px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-81xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--text-m-medium-size);
+    color: var(--colors-accent);
+    font-family: var(--copy-button);
+  }
+  .frame-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-gray-200);
+    box-shadow: var(--nav);
+    width: 280px;
+    height: 100%;
+  }
+  .iconamoonprofile-bold {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .profile {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    font-size: var(--font-size-base);
+    font-family: var(--copy-button);
+    color: var(--wh-heading);
+    text-align: left;
+    display: inline-block;
+  }
+  .iconamoonprofile-bold-parent {
+    position: absolute;
+    top: 96px;
+    left: 24px;
+    width: 232px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-5xs) 0;
+    box-sizing: border-box;
+    gap: var(--gap-xs);
+  }
+  .uploads {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    font-family: var(--copy-button);
+    color: var(--wh-content);
+    text-align: left;
+    display: inline-block;
+  }
+  .material-symbolsupload-parent {
+    position: absolute;
+    top: 160px;
+    left: 24px;
+    width: 232px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-5xs) 0;
+    box-sizing: border-box;
+    gap: var(--gap-xs);
+  }
+  .orders {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    font-size: var(--font-size-base);
+    font-family: var(--copy-button);
+    color: var(--wh-content);
+    text-align: left;
+    display: inline-block;
+  }
+  .lets-iconsorder-light-parent,
+  .material-symbolsfavorite-outl-parent {
+    position: absolute;
+    top: 224px;
+    left: 24px;
+    width: 232px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: var(--padding-5xs) 0;
+    box-sizing: border-box;
+    gap: var(--gap-xs);
+  }
+  .material-symbolsfavorite-outl-parent {
+    top: 288px;
+  }
+  .frame-item {
+    position: absolute;
+    top: 49px;
+    left: -3px;
+    width: 287px;
+    height: 1px;
+    object-fit: contain;
+  }
+  .icon1 {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+  }
+  .brandname1 {
+    position: relative;
+    line-height: 150%;
+    font-weight: 600;
+  }
+  .brand,
+  .material-symbolslogout-parent {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    box-sizing: border-box;
+  }
+  .brand {
+    top: 10px;
+    left: 34px;
+    width: 225px;
+    height: 41px;
+    align-items: center;
+    padding: 0 var(--padding-5xs);
+    gap: var(--gap-5xs);
+  }
+  .material-symbolslogout-parent {
+    top: 1175px;
+    left: 24px;
+    width: 232px;
+    align-items: flex-end;
+    padding: var(--padding-5xs) 0;
+    gap: var(--gap-xs);
+  }
+  .rectangle-parent {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-5xl);
+    color: var(--wh-heading);
+    font-family: var(--copy-button);
+  }
+  .uploads1 {
+    position: absolute;
+    top: 108px;
+    left: 306px;
+    font-weight: 500;
+    display: inline-block;
+    width: 219px;
+    height: 47px;
+  }
+  .button {
+    position: relative;
+    font-size: var(--text-m-medium-size);
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: var(--font-rubik);
+    color: var(--pure-white);
+    text-align: left;
+  }
+  .style-layer {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-5xs) var(--padding-base);
+    background-color: var(--dark-gray);
+    position: absolute;
+    top: 108px;
+    left: 1117px;
+    border-radius: var(--br-5xs);
+    width: 218px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .favorites-child {
+    position: absolute;
+    top: 110px;
+    left: 330px;
+    width: 1005px;
+    height: 400px;
+    overflow: hidden;
+  }
+  .favorites {
+    position: relative;
+    background-color: var(--color-gray-100);
+    width: 100%;
+    height: 1248px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-13xl);
+    color: var(--neutral-gray-gray-25);
+    font-family: var(--text-xl-semibold);
+  }
+ .favorites-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px ;
+}
+
+.container2 {
+  flex-basis: calc(33.33% - 10px); /* Adjust as needed, considering the margin */
+  margin-bottom: 20px;
+}
+
+.cards {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%; /* Set a fixed height for each card */
+}
+
+.mask-group-icon {
+  width: 100%;
+  height: 160px;
+  display: block;
+}
+
+.product-details {
+  padding: 10px;
+  text-align: center;
+}
+
+  .label{
+    font-size: 6px;
+  }
+
+
+  .productname,
+  .categoryname,
+  .wrapper {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .edit-button{
+    position: absolute;
+    bottom: 280px;
+    left: 330px;
+    color: white;
+    background-color: black;
+    border-radius: 2px;
+  }
+
+  .form{
+    position: absolute;
+    bottom: 260px;
+    left: 450px
+  }
+
+  .edit-form {
+    position: absolute;
+    background-color: #f8f8f8;
+    padding: 15px;
+    right: 200px;
+    top: 200px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    display: none;
+    width: 250px; /* Adjust the width as needed */
+  }
+
+  .edit-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .edit-form input,
+  .edit-form textarea {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  .edit-form button {
+    background-color: black;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .edit-form button:hover {
+    background-color: black;
+  }
+
+/* Apply to the outermost container of your web page */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Styling for the balance card */
+.balance-card {
+  background-color: #000;
+  border-radius: 10px; /* You can adjust this for more or less curvature */
+  color: #fff;
+  padding: 20px;
+  width: 300px; /* Width of the rectangle */
+  height: 150px; /* Height of the rectangle, adjust as needed for rectangular shape */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  position: absolute; /* Position it relative to the nearest positioned ancestor or to the initial containing block */
+  top: 0px; /* Distance from the top of the page */
+  left: 20px; /* Distance from the left of the page */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.balance-info {
+  margin-bottom: 10px; /* Adjust space between balance info and buttons */
+}
+
+.balance-title {
+  font-size: 1.2em;
+  margin-bottom: 0.5em; /* Space between title and amount */
+}
+
+.balance-amount {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.balance-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.balance-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.balance-btn:hover {
+  background-color: #555;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  z-index: 999; /* Ensure it's on top of everything */
+  display: none; /* Initially hidden */
+}
+
+/* Center the form */
+.form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1000; /* Ensure it's above the overlay */
+  display: none; /* Initially hidden */
+}
+
+
+
+.submit-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #555;
+}
+
+
+.referral-form-container{
+  position: relative;
+  left: 20px;
+  top:250px
+}
+

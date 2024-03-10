@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global4.css" />
+    <link rel="stylesheet" href="/wallet.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+   
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="favorites">
+      <nav class="favorites-inner">
+        <div class="icon-parent">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="24" 
+           height="24"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+          <div class="notifications-fill0-wght400-gr-parent">
+            <button class="notifications-fill0-wght400-gr">
+              <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>
+            </button>
+            <div class="group-child"></div>
+          </div>
+          <div class="user-wrapper">
+            <b class="user"><%= user ? user.name : 'Unknown' %></b>
+          </div>
+          <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+        </div>
+      </nav>
+      <section class="rectangle-parent">
+        <div class="frame-child"></div>
+        <div class="iconamoonprofile-bold-parent">
+          <iconify-icon icon="iconamoon:profile" style="color: white;"></iconify-icon>
+
+          <button onclick="redirectToProfile()" class="profile">Profile</button>
+        </div>
+        <div class="material-symbolsupload-parent">
+          <iconify-icon icon="material-symbols:upload" style="color: white;"></iconify-icon>
+
+        
+          <button class="uploads">Uploads</button>
+        </div>
+        <div class="lets-iconsorder-light-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;"></iconify-icon>
+
+          <button onclick="redirectToOrders()" class="orders">Orders</button>
+        </div>
+        <img class="frame-item" alt="" src="./public/line-12@2x.png" />
+
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" 
+         height="32"></iconify-icon>
+
+          <div class="brandname1">MarketPlace</div>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+
+           <a href="/signout">
+          <button class="orders">Logout</button>
+        </a>
+        </div>
+      </section>
+<div class="favorites-child"> 
+    <div class="balance-card">
+        <div class="balance-info">
+          <span class="balance-title">Balance</span>
+          <span class="balance-amount">Rs:<%= user.balance%></span>
+        </div>
+
+        <div class="balance-actions">
+            <button id="deposit-btn" class="balance-btn" onclick="toggleDepositForm()">Deposit</button>
+            <button id="withdraw-btn" class="balance-btn" onclick="toggleWithdrawForm()">Withdraw</button>
+        </div>
+        <form action="/deposit" method="post" id="deposit-form" style="display: none;">
+            <label>Deposit Amount</label>
+            <input id="deposit" name="amount" placeholder="Amount($)">
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+            <form action="/withdraw" method="post"id="withdraw-form" style="display: none;">
+                <label>Withdraw Amount</label>
+                <input id="withdraw" name="amount" placeholder="Amount($)">
+                <button type="submit" class="submit-btn">Submit</button>
+              </form>
+      </div>
+      <div class="referral-form-container">
+        <form action="/applyRefferal" method="post" id="apply-referral-form">
+          <a>refferalcode: <%= user.referralCode %> </a>
+          <br>
+            <input type="text" id="referralCode" name="referralCode" placeholder="Enter Referral Code" required>
+            <button type="submit" class="submit-btn">Apply Code</button>
+        </form>
+    </div>
+    
+
+      
+
+</div>
+<script>
+    function toggleDepositForm() {
+        document.querySelectorAll('.balance-info,.balance-btn').forEach(item => {
+            item.style.display = 'none';
+        });
+
+      var depositForm = document.getElementById('deposit-form');
+      depositForm.style.display = (depositForm.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function toggleWithdrawForm() {
+        document.querySelectorAll('.balance-info,.balance-btn').forEach(item => {
+            item.style.display = 'none';
+        });
+      var withdrawForm = document.getElementById('withdraw-form');
+      withdrawForm.style.display = (withdrawForm.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function closeForms() {
+      // Hide forms
+      document.querySelectorAll('.form-container').forEach(form => {
+        form.style.display = 'none';
+      });
+      // Hide overlay
+      document.querySelector('.overlay').style.display = 'none';
+    }
+
+
+    function redirectToaddProducts() {
+      window.location.href = "/users/add";
+    }
+
+    function redirectToProfile() {
+      window.location.href = "/users/userProfile";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/users/orders";
+    }
+
+
+</script>
+  </body>
+</html>

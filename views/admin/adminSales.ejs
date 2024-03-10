@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global47.css" />
+    <link rel="stylesheet" href="/adminSales.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial Rounded MT Bold:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+   <style>
+   .top-products-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            font-family: 'Arial', sans-serif;
+        }
+        .top-products-table th, .top-products-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .top-products-table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .top-products-table td {
+            font-size: 14px;
+        }
+        .top-products-table .product-name {
+            font-weight: bold;
+        }
+        .top-products-table .category {
+            font-style: italic;
+            color: #888;
+        }
+        .top-products-table .price {
+            text-align: right;
+            font-weight: bold;
+        }
+        .top-products-table img {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+   </style>
+  </head>
+  <body>
+    <div class="admin-sales">
+      <section class="rectangle-parent">
+        <div class="frame-child"></div>
+        <button class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+
+
+          <div class="dashboard">Dashboard</div>
+        </button>
+        <button class="fluent-mdl2product-parent" onclick="redirectToProducts()">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+
+
+          <div class="products">Products</div>
+        </button>
+        <button class="mdiuser-outline-parent" onclick="redirectToUsers()">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+
+
+          <div class="products">Users</div>
+        </button>
+        <button class="icon-park-outlinesales-report-parent" onclick="redirectToOrders()">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+
+
+          <b class="products">Orders</b>
+        </button>
+        <button class="mingcutecoupon-line-parent" onclick="redirectToCoupon()">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>                             
+
+
+          <div class="products">Coupons/Promos</div>
+        </button>
+        <button class="iconamooncategory-parent" onclick="redirectToCategory()">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+
+          <div class="products">Category Management</div>
+        </button>
+        <button class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+
+
+          <div class="products" onclick="redirectToBanner()">Banner Management</div>
+        </button>
+        <button class="material-symbolslogout-parent" onclick="redirectTologout()">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+
+
+          <div class="products">Logout</div>
+        </button>
+        <div class="frame-item"></div>
+      </section>
+      <header class="nav">
+        <div class="nav-child"></div>
+        <iconify-icon class="nav-item" icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>            
+
+        <div class="admin-wrapper">
+          <b class="admin">Admin</b>
+        </div>
+      </header>
+      <div class="brand">
+        <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+
+        <div class="brandname">MarketPlace</div>
+      </div>
+      <div class="typebig-image">
+  
+      </div>
+      <div class="sales1">Sales</div>
+      <div class="statistic-chart">
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <!-- Add a select element to choose chart interval -->
+      <div class="rectangle-group">
+        <select id="chartInterval">
+          <option value="monthly" selected>Monthly</option>
+          <option value="yearly">Yearly</option>
+          <option value="weekly">weekly</option>
+        </select>
+        
+        <button id="downloadChartButton"><iconify-icon icon="material-symbols:download" width="15" height="15"  style="color: black"></iconify-icon></button>
+        <form id="downloadform">
+          <input type="date" name="startDate" required>
+          <input type="date" name="endDate" required>
+          <button type="submit">Download Sales Report</button>
+      </form>
+        
+      </div>
+      
+      <div class="group-parent">
+        <div class="rectangle-container">
+          <div class="group-inner"></div>
+          <iconify-icon class="path-icon" icon="mdi:user" width="15" height="15"  style="color: black"></iconify-icon>
+
+          <div class="total-visits">Total Users</div>
+          <div class="m"><%= totalUsers %></div>
+        </div>
+        
+        <div class="rectangle-div"></div>
+        <div class="total-sales">Total sales</div>
+        <div class="div5"><%= totalSales %></div>
+        <iconify-icon class="vector-icon" icon="icon-park-outline:sales-report" width="15" height="15"  style="color: black"></iconify-icon>
+
+        <div class="group-child1"></div>
+        <div class="total-revenue">Total Revenue</div>
+        <div class="k2">Rs: <%= totalRevenue %></div>
+        <iconify-icon class="group-icon" icon="material-symbols:total-dissolved-solids" width="15" height="15"  style="color: black"></iconify-icon>        
+      </div>
+
+      <div class="monthly-sale">
+        
+
+          
+        <div class="body">
+          <h5>Approval Pendings</h5>
+          <% if (productin.length > 0) { %>
+            <table border="2">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Name</th>
+                  <th>User name</th>
+                  <th>Price</th>
+                  <th>Action</th> 
+                </tr>
+              </thead>
+              <tbody>
+                <% productin.forEach(product => { %>
+                  <tr>
+                    <td><img class="productimg" alt="Product Image" src="/<%= product.images[0].path.replace(/\\/g, '/') %>" /></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.seller_name %></td>
+                    <td>Rs: <%= product.price.toFixed(2) %></td>
+                    <td>
+                      <form action="/product/approval" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to set the product to active?');">
+                        <input type="hidden" name="product_id" value="<%= product._id %>">
+                        <input type="hidden" name="status" value="Active">
+                        <button class="icon-button activate-button" type="submit">
+                          <iconify-icon icon="ic:round-check-circle" width="24" height="24"></iconify-icon>
+                        </button>
+                      </form>
+                      <form action="/product/delete" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete the product?');">
+                        <input type="hidden" name="product_id" value="<%= product._id %>">
+                        <button class="icon-button delete-button" type="submit">
+                          <iconify-icon icon="ic:round-delete" width="24" height="24"></iconify-icon>
+                        </button>
+                      </form>
+                      
+                    </td>
+                  </tr>        
+                <% }); %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>No pending approvals.</p>
+          <% } %>
+        </div>
+      </div>
+      <div class="top-product">
+        <h5>Top Products</h5>
+        <table class="top-products-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% topProductsDetails.forEach(function(product) { %>
+                    <tr>
+                        <td>
+                          <img src="/<%= product.images[0].path %>" alt="<%= product.name %>">
+                            <span class="product-name"><%= product.name %></span>
+                        </td>
+                        <td class="price">Rs: <%= product.price %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+      </div>
+
+    
+
+      <div class="top-category">
+       
+    <h3>Top Sellers</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Seller</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% topSellers.forEach(function(seller) { %>
+                <tr>
+                    <td><%= seller._id %></td>
+                    <td>Rs:<%= seller.totalRevenue.toFixed(2) %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+      </div>
+    </div>
+  </body>
+ <script>
+    
+
+    document.getElementById('downloadChartButton').addEventListener('click', function() {
+    const selectedInterval = document.getElementById('chartInterval').value; // Get selected interval
+    const excelDownloadUrl = `/export-sales?interval=${selectedInterval}`; // Append selected interval to the URL
+    
+    // Triggers the download of the Excel file for the selected interval
+    window.location.href = excelDownloadUrl;
+});
+
+
+
+let myChart = null;
+
+function fetchChartData(url, interval) {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log('API response data:', data);
+
+        const { productCounts, salesData } = data;
+
+        if (!productCounts || !salesData) {
+            console.error('Product counts or sales data is missing in the API response.');
+            return;
+        }
+
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        const labels = [];
+        const productData = [];
+        const salesDataPoints = [];
+
+        console.log(productCounts);
+        console.log(salesData);
+
+        if (interval === 'yearly') {
+            for (let i = currentYear - 5; i <= currentYear; i++) {
+                labels.push(i.toString());
+
+                // Find sales count for the year
+                const salesCount = salesData.find(item => item._id.year === i);
+                salesDataPoints.push(salesCount ? salesCount.sales : 0);
+
+                // Find product count for the year
+                const productCount = productCounts.find(item => item._id.year === i);
+                productData.push(productCount ? productCount.count : 0);
+            }
+          } else if (interval === 'monthly') {
+    for (let i = 0; i < 5; i++) {
+        const monthLabel = new Date(currentYear, i, 1).toLocaleString('default', { month: 'long' });
+        labels.push(monthLabel);
+
+        // Adjusting for 1-indexed months in your data
+        const dataMonth = i + 1; // Adjust for 1-indexed month in data
+
+        if (i > currentMonth) {
+            productData.push(null);
+            salesDataPoints.push(null);
+        } else {
+            // Corrected month indexing when fetching data
+            const productCount = productCounts.find(item => item._id.month === dataMonth);
+            const salesCount = salesData.find(item => item._id.month === dataMonth);
+
+            productData.push(productCount ? productCount.count : 0);
+            salesDataPoints.push(salesCount ? salesCount.sales : 0);
+        }
+    }
+}
+
+            
+        else if (interval === 'weekly') {
+    // Get the current week number
+    const currentWeek = getCurrentWeekNumber(new Date());
+
+    for (let i = currentWeek - 6; i <= currentWeek; i++) {
+        // Assuming the week number is 1-indexed
+        labels.push(`Week ${i}`);
+
+        const productCount = productCounts.find(item => item._id.week === i);
+        const salesCount = salesData.find(item => item._id.week === i);
+
+        productData.push(productCount ? productCount.count : 0);
+        salesDataPoints.push(salesCount ? salesCount.sales : 0);
+    }
+
+        }
+             
+        console.log(productData);
+        console.log(salesDataPoints);
+            const maxDataValue = Math.max(...productData, ...salesDataPoints);
+            const yAxisMax = Math.ceil(maxDataValue / 10) * 10 + 2;
+
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Uploads',
+                            data: productData,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Sales',
+                            data: salesDataPoints,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxRotation: 0,
+                                minRotation: 0
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            beginAtZero: true,
+                            max: yAxisMax
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching chart data:', error);
+        });
+}
+
+fetchChartData('/api/chart-data?interval=monthly', 'monthly');
+
+let totalSales = 0
+
+document.getElementById('chartInterval').addEventListener('change', function() {
+    const selectedInterval = this.value;
+    const apiUrl = `/api/chart-data?interval=${selectedInterval}`;
+    fetchChartData(apiUrl, selectedInterval);
+});
+
+function getCurrentWeekNumber(date) {
+    const startOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date - startOfYear) / 86400000;
+    return Math.ceil((pastDaysOfYear + startOfYear.getDay() + 1) / 7);
+}
+
+document.getElementById('downloadform').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const startDate = this.startDate.value;
+    const endDate = this.endDate.value;
+    window.location.href = `/sales-report/download?startDate=${startDate}&endDate=${endDate}`;
+});
+
+
+
+
+
+function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+
+
+function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+    function redirectToCoupon() {
+      window.location.href = "/admin/coupon";
+    }
+
+    function redirectTologout() {
+      window.location.href = "/signout";
+    }
+
+  </script>
+</html>

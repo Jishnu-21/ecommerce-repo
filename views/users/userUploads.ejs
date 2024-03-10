@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global4.css" />
+    <link rel="stylesheet" href="/userUploads.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+   
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="favorites">
+      <nav class="favorites-inner">
+        <div class="icon-parent">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="24" 
+           height="24"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+          <div class="notifications-fill0-wght400-gr-parent">
+            <button class="notifications-fill0-wght400-gr">
+              <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>
+            </button>
+            <div class="group-child"></div>
+          </div>
+          <div class="user-wrapper">
+            <b class="user"><%= user ? user.name : 'Unknown' %></b>
+          </div>
+          <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+        </div>
+      </nav>
+      <section class="rectangle-parent">
+        <div class="frame-child"></div>
+        <div class="iconamoonprofile-bold-parent">
+          <iconify-icon icon="iconamoon:profile" style="color: white;"></iconify-icon>
+
+          <button onclick="redirectToProfile()" class="profile">Profile</button>
+        </div>
+        <div class="material-symbolsupload-parent">
+          <iconify-icon icon="material-symbols:upload" style="color: white;"></iconify-icon>
+
+        
+          <button class="uploads">Uploads</button>
+        </div>
+        <div class="lets-iconsorder-light-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;"></iconify-icon>
+
+          <button onclick="redirectToOrders()" class="orders">Orders</button>
+        </div>
+        <img class="frame-item" alt="" src="./public/line-12@2x.png" />
+
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" 
+         height="32"></iconify-icon>
+
+          <div class="brandname1">MarketPlace</div>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+
+           <a href="/signout">
+          <button class="orders">Logout</button>
+        </a>
+        </div>
+      </section>
+      <div class="uploads1">Uploads</div>
+<button onclick="redirectToaddProducts()" class="style-layer">
+  <div class="button">UPLOAD FILE</div>
+</button>
+
+<div class="favorites-child"> 
+  <% products.forEach(product => { %>
+    <div class="container2">
+      <div class="cards">
+        <% if (product.images && product.images.length > 0) { %>
+          <a href="/product/<%= product.product_id %>">
+            <img class="mask-group-icon" alt="" src="data:image/jpeg;base64, <%= product.imageData %>"/>
+          </a>
+        <% } %>
+        <div class="product-details">
+          <div class="productname"><%= product.name %></div>
+          <div class="categoryname"><%= product.categoryName %></div>
+          <div class="productname">Quantity: <%= product.quantity %></div>
+          <div class="productname">Status: <%= product.status %></div>
+
+          <div class="wrapper">
+            <b class="b">Rs: <%= product.price %></b>
+          </div>
+        </div>
+        <button onclick="openEditForm('<%= product._id %>')"><iconify-icon icon="material-symbols:edit" width="16" height="16"  style="color: black"></iconify-icon></button>
+
+      </div>
+    </div>
+  <% }); %>  
+</div>
+
+
+
+
+<% products.forEach(product => { %>
+  <div id="editForm<%= product._id %>" class="edit-form">
+    <form action="/editProduct/<%= product._id %>" method="POST">
+
+      
+      <label for="editName<%= product._id %>">Name:</label>
+      <input type="text" id="editName<%= product._id %>" name="name" value="<%= product.name %>" required>
+
+      <label for="editDescription<%= product._id %>">Description:</label>
+      <textarea id="editDescription<%= product._id %>" name="description" required><%= product.description %></textarea>
+
+      <label for="editCategory<%= product._id %>">Category:</label>
+      <input type="text" id="editCategory<%= product._id %>" name="categoryname" value="<%= product.categoryName %>" required>
+
+      <label for="editQuantity<%= product._id %>">Quantity:</label>
+      <input type="number" id="editQuantity<%= product._id %>" name="quantity" value="<%= product.quantity %>" required>
+
+      <label for="editPrice<%= product._id %>">Price:</label>
+      <input type="number" id="editPrice<%= product._id %>" name="price" value="<%= product.price %>" required>
+
+      <button type="submit">Save Changes</button>
+    </form>
+    <button onclick="hideEditForm('<%= product._id %>')">Cancel</button>
+  </div>
+  <% }); %>  
+
+<script>
+    
+    function redirectToaddProducts() {
+      window.location.href = "/users/add";
+    }
+
+    function openEditForm(ProductId) {
+  document.getElementById(`editForm${ProductId}`).style.display = 'block';
+  
+}
+
+function hideEditForm(ProductId) {
+  document.getElementById(`editForm${ProductId}`).style.display = 'none';
+}
+
+function hideAllEditForms() {
+  const editForms = document.querySelectorAll('[id^="editForm"]');
+  editForms.forEach(form => {
+    form.style.display = 'none';
+  });
+
+}
+
+
+    function redirectToProfile() {
+      window.location.href = "/users/userProfile";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/users/orders";
+    }
+
+
+</script>
+  </body>
+</html>

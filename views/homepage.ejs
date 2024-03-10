@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="/global2.css" />
+    <link rel="stylesheet" href="/homepage.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="landing-page">
+      <nav class="typesearch-bar">
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: black;" width="25" height="25"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+        <div class="nav-links">
+          <div class="nav-link">
+            <button class="small-icon-icon">
+              <img class="vector-icon" alt="" src="./public/vector@2x.png" />
+            </button>
+          </div>
+          <div class="nav-link">
+            <a href="/users/userCart" class="cart-link">
+              <% if (user) { %>
+                Cart
+              <span class="cart-count"><%= user.cart.items.length %> </span> <!-- This span will display the cart count -->
+              <% } else { %>
+              <span> </span>
+              <% } %>
+            </a>
+          </div>
+          
+          <div class="john-24-wrapper">
+            <div class="john-24" onclick="toggleUserDropdown()"><%= user ? user.name : '' %></div>
+
+            <div id="userDropdown" class="dropdown-content" style="display: none;">
+              <a href="/users/userProfile">Profile</a>
+              <a href="/users/orders">Order</a>
+              <a href="/users/wallet">Wallet</a>
+
+              <a href="/signout">Logout</a>
+            </div>
+          </div>
+          
+       
+          <% if (user) { %>
+            <a href="/signout">
+              <button class="button">
+                <div class="text-container">
+                  <div class="cta">Logout</div>
+                </div>
+              </button>
+            </a>
+          <% } else { %>
+            <a href="/login">
+              <button class="button">
+                <div class="text-container">
+                  <div class="cta">Login</div>
+                </div>
+              </button>
+            </a>
+          <% } %>
+        </div>
+      </nav>
+      <div class="content-wrapper">
+        <div class="unsplash9xngoipxceo-parent">
+          <% if (activeBanners && activeBanners.length > 0) { %>
+            <a href="" id="bannerLink" target="_blank">
+              <div id="bannerData" style="display: none;" data-banners="<%- JSON.stringify(activeBanners).replace(/"/g, '&quot;') %>"></div>
+              <img id="bannerImage" class="unsplash9xngoipxceo-icon" alt="" src="">
+            </a>
+          <% } else { %>
+            <a href="/" target="_blank">
+              <img class="unsplash9xngoipxceo-icon" alt="Default Banner" src="/homepage-banner.jpg">
+            </a>
+          <% } %>
+        
+        
+          <div class="copy-component">
+            <div class="heading-text">
+              <b class="heading">
+                <p class="discover-a-world">Discover a World of</p>
+                <p class="discover-a-world">3D Models</p>
+              </b>
+              <div class="subheading">
+                Find everything you need in one place.
+              </div>
+            </div>
+            <div class="input-form">
+              <form id="searchForm" action="/" method="get">
+                  <input class="text-form" name="search" placeholder="Search" type="text" autocomplete="off"/>
+                  <button class="search" type="button" onclick="submitForm()">
+                    <iconify-icon icon="material-symbols:search" width="24" height="24"></iconify-icon>
+                  </button>                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typesuper-gallery">
+        <div class="container">
+          <div class="heading-container">
+            <b class="heading1">Our Product Categoies</b>
+            <div class="subheading1">A glimpse into our variety.</div>
+          </div>
+          <div class="showcase-container">
+            <div class="showcase-grid">
+              <div class="fbx-parent">
+                <iconify-icon icon="eos-icons:abstract-outlined" width="56" height="56"  style="color: black"></iconify-icon>
+                <div class="fbx">Abstract</div>
+              </div>
+              <div class="fbx-parent">
+                <iconify-icon icon="mdi:car" width="50" height="50"  style="color: black"></iconify-icon>
+                <div class="fbx">Cars</div>
+              </div>
+              <div class="fbx-parent">
+                <iconify-icon icon="simple-icons:blender" style="color: black;" width="56" height="56"></iconify-icon>
+                <div class="fbx">Sci-fi</div>
+              </div>
+              <div class="fbx-parent">
+                <iconify-icon icon="pajamas:nature" width="50" height="50"  style="color: black"></iconify-icon>
+                <div class="fbx">Nature</div>
+              </div>
+              <div class="fbx-parent">
+                <iconify-icon icon="ion:bulb" width="50" height="50"  style="color: black"></iconify-icon> 
+                <div class="fbx">Tech</div>
+              </div>
+              <div class="fbx-parent">
+                <iconify-icon icon="bi:unity" style="color: black;" width="56" height="56"></iconify-icon>
+                <div class="fbx">More</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="typedouble-trouble">
+        <b class="heading1">3d Models</b>
+      </div>
+      <div class="hero">
+      <div class="filters-parent">
+        <h1 class="filters">Filters</h1>
+        <div class="frame-parent5">
+          <div class="categories-parent">
+            <h1 class="wrapper">Sort By</h1>
+          </div>
+          <div class="frame-parent2">
+            <select id="sortSelect" onchange="applySort()">
+              <option value="price_asc">Price (Low to High)</option>
+              <option value="price_desc">Price (High to Low)</option>
+              <option value="name_asc">Name (A to Z)</option>
+              <option value="name_desc">Name (Z to A)</option>
+            </select>
+          </div>
+        </div>
+        <div class="frame-parent">
+          <div class="categories-parent">
+            <h2 class="categories">Categories</h2>
+            <button class="drop" onclick="toggleFilter('categoriesDropdown')">
+              <iconify-icon icon="ion:chevron-up-outline" width="24" height="24"></iconify-icon>
+          </button>
+          </div>
+          <div id="categoriesDropdown" class="frame-parent2" style="display: none;">
+            <div class="frame-wrapper">
+              <% categories.forEach(category => { %>
+                <div class="button-parent">
+                  <label class="category-checkbox">
+                    <input type="checkbox" name="category" value="<%= category.name %>">
+                    <%= category.name %>
+                  </label>
+                </div>
+              <% }); %>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="frame-parent">
+          <div class="categories-parent">
+            <h2 class="categories">Price</h2>
+            <button class="drop" onclick="toggleFilter('priceDropdown')">
+              <iconify-icon icon="ion:chevron-up-outline" width="24" height="24"></iconify-icon>
+          </button>
+          </div>
+          <div id="priceDropdown" class="frame-parent6">
+            <div class="price-slider-container">
+              <label for="priceSlider">Price Range:</label>
+              <input type="range" id="priceSlider" name="priceSlider" min="0" max="1000" step="1" value="0">
+            </div>
+            
+          </div>
+          <button id="filterButton" class="button" onclick="applyFilters()">
+            <div class="text-container">
+              <div class="cta">Filter</div>
+            </div>
+          </button>
+        </div>
+   
+        
+      
+    </div>
+    <div class="typesuper-gallery-child">
+      <div class="group-parent">
+        <% if (searchQuery) { %>
+          <div class="search-results-info">
+            <p>Showing results for: <%= searchQuery %></p>
+          </div>
+        <% } %>
+        <% products.forEach(product => { %>
+          <div class="container2">
+            <div class="cards">
+              <% if (product.images && product.images.length > 0) { %>
+                <a href="/product/<%= product.product_id %>">
+                  <!-- Use product.imageData instead of imageData -->
+                  <img class="mask-group-icon" alt="" src="data:image/jpeg;base64, <%= product.imageData %>"/>
+                </a>
+              <% } %>
+              <div class="product-details">
+                <div class="productname"><%= product.name %></div>
+                <div class="categoryname"><%= product.categoryName %></div>
+                <div class="wrapper">
+                  <b class="b">Rs:<%= product.price %></b>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }); %>   
+      </div>
+    </div>
+      </div>
+      <footer class="footer">
+        <div class="columns">
+          <div class="column">
+            <div class="brand1">
+              <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="24" height="24"></iconify-icon>
+              <div class="brandname">MarketPlace</div>
+            </div>
+          </div>
+          <div class="small-columns">
+            <div class="column1">
+              <div class="content">
+                <b class="company">COMPANY</b>
+                <div class="footer-links">
+                  <div class="company">How it works</div>
+                  <div class="company">Pricing</div>
+                  <div class="company">Demo</div>
+                </div>
+              </div>
+            </div>
+            <div class="column1">
+              <div class="content">
+                <b class="company">RESOURCES</b>
+                <div class="footer-links">
+                  <div class="company">Blog post name goes here</div>
+                  <div class="company">Blog post name goes here</div>
+                  <div class="company">See all resources</div>
+                </div>
+              </div>
+            </div>
+            <div class="column1">
+              <div class="content">
+                <b class="company">ABOUT</b>
+                <div class="footer-links">
+                  <div class="link6">Terms & Conditions</div>
+                  <div class="link6">Privacy Policy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="text">Copyright © 2023 Company name</div>
+        </div>
+      </footer>
+    </div>
+    <script>
+
+function toggleClickedState(button) {
+  button.classList.toggle('clicked');
+}
+
+
+
+     function toggleFilter(filterId) {
+    const dropdown = document.getElementById(filterId);
+    const dropButton = dropdown.previousElementSibling.querySelector(".drop");
+
+    // Toggle the visibility of the dropdown
+    if (dropdown.style.display === "none" || dropdown.style.display === "") {
+      dropdown.style.display = "block";
+      // Change the icon when the dropdown is shown
+      dropButton.innerHTML = '<iconify-icon icon="tabler:chevron-down" width="24" height="24"></iconify-icon>';
+    } else {
+      dropdown.style.display = "none";
+      // Change the icon when the dropdown is hidden
+      dropButton.innerHTML = '<iconify-icon icon="ion:chevron-up-outline" width="24" height="24"></iconify-icon>';
+    }
+ }
+
+ const priceSlider = document.getElementById("priceSlider");
+const selectedMinPrice = document.getElementById("selectedMinPrice");
+const selectedMaxPrice = document.getElementById("selectedMaxPrice");
+
+// Update the selected range display when either slider handle changes
+priceSlider.addEventListener("input", function() {
+  const minPrice = parseInt(this.value);
+  selectedMinPrice.textContent = `$${minPrice}`;
+});
+
+// Add an event listener for the input event on the slider to handle changes to the maximum price
+priceSlider.addEventListener("change", function() {
+  const maxPrice = parseInt(this.value);
+  selectedMaxPrice.textContent = `$${maxPrice}`;
+});
+0
+
+    
+function toggleUserDropdown() {
+  const dropdown = document.getElementById("userDropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.john-24')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.style.display === "block") {
+        openDropdown.style.display = "none";
+      }
+    }
+  }
+}
+
+
+
+function applyFilters() {
+  // Get the selected price range
+  const minPrice = document.getElementById("priceSlider").min;
+  const maxPrice = document.getElementById("priceSlider").value;
+
+  // Get the selected category IDs
+  const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(checkbox => checkbox.value);
+
+  // Get the selected sorting option
+  const sortSelect = document.getElementById("sortSelect");
+  const selectedSortOption = sortSelect.value;
+
+  // Construct the query string with selected filters and sorting option
+  const queryParams = new URLSearchParams();
+  queryParams.append('minPrice', minPrice);
+  queryParams.append('maxPrice', maxPrice);
+  selectedCategories.forEach(category => {
+    queryParams.append('category', category);
+  });
+  queryParams.append('sort', selectedSortOption);
+
+  // Check if there is already a search query parameter
+  const searchParams = new URLSearchParams(window.location.search);
+  const searchQuery = searchParams.get('search');
+  if (searchQuery) {
+    queryParams.append('search', searchQuery);
+  }
+
+  // Redirect to the homepage with the applied filters and sorting option
+  window.location.href = `/?${queryParams.toString()}`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Read URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get('search');
+  const selectedCategories = urlParams.getAll('category'); // Use getAll() to get all values for a parameter
+  const selectedSortOption = urlParams.get('sort');
+
+  // Set search input value
+  const searchInput = document.querySelector('input[name="search"]');
+  if (searchQuery) {
+    searchInput.value = searchQuery;
+  }
+
+  // Set selected categories
+  selectedCategories.forEach(category => {
+    const checkbox = document.querySelector(`input[name="category"][value="${category}"]`);
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+  });
+
+  // Set price slider position and selected range display
+  const priceSlider = document.getElementById('priceSlider');
+  const selectedPrice = document.getElementById('selectedPrice');
+  const minPrice = urlParams.get('minPrice');
+  const maxPrice = urlParams.get('maxPrice');
+  if (minPrice && maxPrice) {
+    priceSlider.value = maxPrice;
+    selectedPrice.textContent = `$0 - $${maxPrice}`;
+  } else {
+    // Default position if parameters are not present
+    priceSlider.value = 0;
+    selectedPrice.textContent = `$0 - $0`;
+  }
+
+  // Set selected sorting option
+  if (selectedSortOption) {
+    const sortSelect = document.getElementById("sortSelect");
+    sortSelect.value = selectedSortOption;
+  }
+
+  // Add event listeners for filter, search, and sort
+  document.getElementById('filterButton').addEventListener('click', applyFilters);
+  searchInput.addEventListener('input', filterProducts);
+  document.getElementById('sortSelect').addEventListener('change', applySort);
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const bannerDataElement = document.getElementById('bannerData');
+    const activeBanners = JSON.parse(bannerDataElement.getAttribute('data-banners'));    let currentBannerIndex = 0;
+
+    function updateBanner() {
+        if (activeBanners.length > 0) {
+            const banner = activeBanners[currentBannerIndex];
+            const bannerLink = document.getElementById('bannerLink');
+            const bannerImage = document.getElementById('bannerImage');
+
+            bannerLink.href = banner.link;
+            bannerImage.src = banner.imageUrl;
+            bannerImage.alt = banner.title;
+
+            currentBannerIndex = (currentBannerIndex + 1) % activeBanners.length;
+        }
+    }
+
+    // Update banner every 5 seconds
+    setInterval(updateBanner, 10000);
+
+    // Initially set the first banner
+    updateBanner();
+});
+
+    </script>
+  </body>
+</html>

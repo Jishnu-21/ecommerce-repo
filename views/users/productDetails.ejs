@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="/global3.css" />
+  <link rel="stylesheet" href="/productDetails.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" />
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  
+</head>
+<body>
+  <div class="product-page">
+    <footer class="footer">
+      <div class="columns">
+        <div class="column">
+          <div class="brand">
+            <iconify-icon icon="solar:bag-smile-bold" style="color: rgb(255, 255, 255);" width="24" height="24"></iconify-icon>
+            <div class="brandname">MarketPlace</div>
+          </div>
+        </div>
+        <div class="small-columns">
+          <div class="column2">
+            <div class="content">
+              <b class="company">COMPANY</b>
+              <div class="footer-links">
+                <div class="company">How it works</div>
+                <div class="company">Pricing</div>
+                <div class="company">Demo</div>
+              </div>
+            </div>
+          </div>
+          <div class="column2">
+            <div class="content">
+              <b class="company">RESOURCES</b>
+              <div class="footer-links">
+                <div class="company">Blog post name goes here</div>
+                <div class="company">Blog post name goes here</div>
+                <div class="company">See all resources</div>
+              </div>
+            </div>
+          </div>
+          <div class="column2">
+            <div class="content">
+              <b class="company">ABOUT</b>
+              <div class="footer-links">
+                <div class="link6">Terms & Conditions</div>
+                <div class="link6">Privacy Policy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="text">Copyright © 2023 Company name</div>
+      </div>
+    </footer>
+    <form action="/addToCart" method="POST">
+      <div class="card">
+      <div class="product-details10">
+        <div class="productname"><%= product.name %></div>
+        <div class="categoryname">
+          <a><%= product.categoryName %></a>
+        </div>
+        <div class="productPrice">
+          <b>Rs:<%= product.price %></b>
+        </div>
+        <div class="productdescription">
+          <b>Seller Name:</b> <%= product.seller_name %>
+          <br>
+        <b><%= product.description %></b>
+      </div>    
+      </div>
+      <div class="product-page-inner">
+        <div class="frame-parent">
+          <div class="quantity-selector">
+            <label for="quantity">Quantity:</label>
+            <select id="quantity" name="quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="button-parent">
+            <button class="button" type='submit'>
+              <div class="style-layer">
+                <div class="button1">Add to cart</div>
+              </div>
+            </button>
+            <button class="button2">
+              <div class="style-layer1">
+                <img class="heart-icon" alt="" src="./public/heart@2x.png" />
+              </div>
+            </button>
+          </div>
+          <div class="button3">
+            <button class="style-layer2">
+              <div class="button4">Buy it now</div>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+      <nav class="product-page-child">
+        <div class="icon-parent">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: rgb(0, 0, 0);" width="32" height="32"></iconify-icon>
+          <div class="brandname1">MarketPlace</div>
+          <div class="notifications-fill0-wght400-gr-parent">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>         
+           <div class="group-child"></div>
+          </div>
+          <div class="user-wrapper">
+            <b class="john-24-wrapper"><%= user ? user.name : 'Guest' %></b>
+            <div id="userDropdown" class="dropdown-content" style="display: none;">
+              <a href="/users/userProfile">Profile</a>
+              <a href="/users/orders">Order</a>
+              <a href="/users/wallet">Wallet</a>
+
+              <a href="/signout">Logout</a>
+            </div>
+          </div>
+          <% if (user) { %>
+            <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+          <% } %>
+        </div>
+      </nav>
+      <div class="product-page-item">
+        <% if (product.images && product.images.length > 0) { %>
+          <a href="/product/<%= product.product_id %>">
+            <img class="mask-group-icon" alt="" src="data:image/jpeg;base64, <%= product.imageData[0] %>"/>
+          </a>
+        <% } %>
+      </div>
+      <input type="hidden" name="productId" value="<%= product._id %>">
+      <input type="hidden" name="productPrice" value="<%= product.price %>">
+      
+      <div class="product-image">
+      <div class="frame-div">
+        <% if (product.images && product.images.length > 0) { %>
+          <a href="/product/<%= product.product_id %>" class="thumbnail">
+            <img class="mask-group-icon" alt="" src="data:image/jpeg;base64, <%= product.imageData[1] %>"/>
+          </a>
+        <% } %>
+      </div>
+      <div class="product-page-child1">
+        <% if (product.images && product.images.length > 0) { %>
+          <a href="/product/<%= product.product_id %>" class="thumbnail">
+            <img class="mask-group-icon" alt="" src="data:image/jpeg;base64, <%= product.imageData[0] %>"/>
+          </a>
+        <% } %>
+      </div>
+      
+      <div class="product-page-child2">
+        <% if (product.images && product.images.length > 0) { %>
+          <a href="/product/<%= product.product_id %>" class="thumbnail">
+            <img class="mask-group-icon" alt="" src="data:image/jpeg;base64, <%= product.imageData[2] %>"/>
+          </a>
+        <% } %>
+      </div>
+    </div>
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2>You may also like</h2>
+          <div class="product-carousel">
+            <% relatedProducts.forEach(function(relatedProduct) { %>
+              <div class="product-carousel-item">
+                <a href="/product/<%= relatedProduct.product_id %>"> <!-- Make sure to use product_id here -->
+                  <% if (relatedProduct.images && relatedProduct.images.length > 0 && relatedProduct.images[0].path) { %>
+                    <!-- Use the 'path' property for the image source -->
+                    <img src="/<%= relatedProduct.images[0].path %>" alt="<%= relatedProduct.name %>"/>
+                  <% } else { %>
+                    <!-- Display a placeholder image if no images are available -->
+                    <img src="/path/to/default/image.jpg" alt="Default Image"/>
+                  <% } %>
+                  <div class="product-name"><%= relatedProduct.name %></div>
+                  <div class="product-price">Rs: <%= relatedProduct.price %></div>
+                </a>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+      
+      
+    </form>
+    <script>
+
+    $(document).ready(function(){
+        $('.slider-container').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: true,
+            asNavFor: '.frame-div, .product-page-child1, .product-page-child2' // Syncs with other sliders
+        });
+    });
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const mainImage = document.querySelector(".product-page-item img");
+        const thumbnails = document.querySelectorAll(".thumbnail");
+        if (mainImage && thumbnails) {
+          thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener("click", function (event) {
+              event.preventDefault();
+              const newImageSrc = thumbnail.querySelector("img").src;
+              mainImage.src = newImageSrc;
+            });
+          });
+        }
+      });
+
+      function redirectToCart() {
+      window.location.href = "/users/usercart";
+    }
+
+    function toggleUserDropdown() {
+  const dropdown = document.getElementById("userDropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.john-24')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.style.display === "block") {
+        openDropdown.style.display = "none";
+      }
+    }
+  }
+}
+    </script>
+  </body>
+</html>

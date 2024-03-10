@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global23.css" />
+    <link rel="stylesheet" href="/success.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial Rounded MT Bold:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  </head>
+  <body>
+    <div class="download">
+      <footer class="footer">
+        <div class="columns">
+          <div class="column">
+            <div class="column">
+              <div class="column">
+                <div class="brand">
+                  <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="22" 
+                  height="22"></iconify-icon>
+                  <div class="brandname">MarketPlace</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="small-columns">
+            <div class="column3">
+              <div class="content">
+                <b class="company">COMPANY</b>
+                <div class="footer-links">
+                  <div class="company">How it works</div>
+                  <div class="company">Pricing</div>
+                  <div class="company">Demo</div>
+                </div>
+              </div>
+            </div>
+            <div class="column3">
+              <div class="content">
+                <b class="company">RESOURCES</b>
+                <div class="footer-links">
+                  <div class="company">Blog post name goes here</div>
+                  <div class="company">Blog post name goes here</div>
+                  <div class="company">See all resources</div>
+                </div>
+              </div>
+            </div>
+            <div class="column3">
+              <div class="content">
+                <b class="company">ABOUT</b>
+                <div class="footer-links">
+                  <div class="link6">Terms & Conditions</div>
+                  <div class="link6">Privacy Policy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="text">Copyright © 2023 Company name</div>
+        </div>
+      </footer>
+      <a
+        class="all-rights-reserved-container"
+        href="https://visiata.com/"
+        target="_blank"
+      >
+        <span>
+          <span>© All rights reserved | Made with </span>
+          <b class="b">❤️ </b>
+          <span class="b">by </span>
+        </span>
+        <span class="visiata-systems-international"
+          >Visiata Systems International</span
+        >
+      </a>
+      <nav class="download-inner">
+        <div class="icon-parent">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: black;" width="32" 
+          height="32"></iconify-icon>
+          <div class="brandname1">MarketPlace</div>
+          <div class="notifications-fill0-wght400-gr-parent">
+            <button class="notifications-fill0-wght400-gr">
+              <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>
+            </button>
+            <div class="group-child"></div>
+          </div>
+          <div class="user-wrapper">
+            <b class="user"><%= user ? user.name : 'Guest' %></b>
+          </div>
+          <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>">
+        </div>
+      </nav>
+      <div class="frame-parent">
+        <div class="frame-child"></div>
+        <div class="order-succesfull-wrapper">
+          <div class="order-succesfull">Order Succesfull</div>
+        </div>
+        <div class="frame-group">
+          <div class="your-order-will-be-shipped-soo-wrapper">
+            <div class="your-order-will">
+              Your Order will be shipped soon , if you need any assistance
+              contact 7994048130
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+      <button onclick="redirectToHomepage()" class="button">
+        <div class="style-layer">
+          <div class="button1">Back to homepage</div>
+        </div>
+      </button>
+    </div>
+  </body>
+  <script>
+     function redirectToHomepage() {
+      window.location.href = "/";
+    }
+  </script>
+</html>

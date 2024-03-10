@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-dashboard">
+      <main class="fluent-mdl2accept-parent">
+        <h1>Categories</h1>
+        <button class="addbutton"  onclick="showAddForm()">Add Banner</button>
+
+  <!-- Popup Form Overlay -->
+<div id="addFormPopup" class="form-popup-overlay" style="display: none;">
+  <div class="form-popup">
+    <h2>Add Category</h2>
+    <form id="addForm" action="/banner/add" method="post">
+      <!-- Title -->
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+      <br>
+    
+      <!-- Image URL -->
+      <label for="imageUrl">Image URL:</label>
+      <input type="text" id="imageUrl" name="imageUrl" required>
+      <br>
+    
+      <!-- Link -->
+      <label for="link">Link:</label>
+      <input type="text" id="link" name="link" required>
+      <br>
+    
+      <!-- isActive -->
+      <label for="isActive">Active:</label>
+      <select id="isActive" name="isActive" required>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+      <br>
+    
+      <div id="formError" class="form-error"></div>
+    
+      <button type="submit">Add Banner</button>
+      <button type="button" onclick="closeAddForm()">Cancel</button>
+    </form>
+    
+  </div>
+</div>
+
+        <table border="2">
+          <thead>
+            <tr>
+              <th>Banner Id</th>
+              <th>Name</th>
+              <th>url</th>
+              <th>link</th>
+              <th>Status</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% banners.forEach(banner => { %>
+              <tr>
+                <td><%= banner.banner_id %></td>
+                <td><%= banner.title %></td>
+                <td><%= banner.imageUrl %></td>
+                <td><%= banner.link %></td>
+                <td><%= banner.status %></td>
+                <td>
+                  <form action="/banner/status" method="post" style="display: inline-block; " onsubmit="return confirm('Are you sure you want to perform this action?');">
+                    <input type="hidden" name="banner_id" value="<%= banner.banner_id %>">
+                    <input type="hidden" name="status" value="<%= banner.isActive === 'true' ? 'false' : 'true' %>">
+                    <button class="block-button" type="submit">
+                        <% if(banner.isActive === 'true') { %>
+                          <iconify-icon icon="material-symbols:delete" width="16" height="16"  style="color: black"></iconify-icon>
+                          <% } else { %>
+                            <iconify-icon icon="mdi:tick" width="16" height="16"  style="color: black"></iconify-icon>
+                          <% } %>
+                    </button>
+                </form>                
+                  <button href="#"  onclick="openEditForm('<%= banner.banner_id %>')"><iconify-icon icon="material-symbols:edit" width="16" height="16"  style="color: black"></iconify-icon></button>
+                        
+                  <form id="editForm<%= banner.banner_id %>" action="/banner/edit" method="post" style="display: none;">
+                    <input type="hidden" name="bannerId" value="<%= banner._id %>">
+                
+                    <label for="editTitle<%= banner.banner_id %>">Title:</label>
+                    <input type="text" id="editTitle<%= banner.banner_id %>" name="title" value="<%= banner.title %>" required>
+                    <br>
+                
+                    <label for="editImageUrl<%= banner.banner_id %>">Image URL:</label>
+                    <input type="text" id="editImageUrl<%= banner.banner_id %>" name="imageUrl" value="<%= banner.imageUrl %>" required>
+                    <br>
+                
+                    <label for="editLink<%= banner.banner_id %>">Link:</label>
+                    <input type="text" id="editLink<%= banner.banner_id %>" name="link" value="<%= banner.link %>" required>
+                    <br>
+                
+                    <label for="editIsActive<%= banner.banner_id %>">Active:</label>
+                    <select id="editIsActive<%= banner.banner_id %>" name="isActive" required>
+                        <option value="true" <%= banner.isActive ? 'selected' : '' %>>Yes</option>
+                        <option value="false" <%= !banner.isActive ? 'selected' : '' %>>No</option>
+                    </select>
+                    <br>
+                
+                    <div id="message<%= banner.banner_id %>"></div>
+                
+                    <button type="submit">Save Changes</button>
+                    <button type="button" onclick="hideEditForm('<%= banner.banner_id %>')">Cancel</button>
+                </form>
+                
+                </td>
+              </tr>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </main> 
+      <nav class="nav">
+        <b class="admin">Admin</b>
+        <ol class="notifications-fill0-wght400-gr-wrapper">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>            
+            </button>
+        </ol>
+      </nav>
+      <section class="frame-parent">
+        <div class="line-vertical"></div>
+        <div class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToDash()">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+          <button class="products" onclick="redirectToOrders()">Order</button>
+        </div>
+        <div class="mingcutecoupon-line-parent">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>               
+          <button class="products" onclick="redirectToCoupon()">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products">Banner Management</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <a href="/signout">
+          <button class="products">Logout</button>
+          </a>
+        </div>
+        <div class="frame-item"></div>
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+        <div class="mdiuser-outline-parent">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+                <button class="products" onclick="redirectToUsers()">Users</button>
+            </div>
+      </section>
+    </div>
+  </body>
+  <script>
+     
+     function showAddForm() {
+    document.getElementById('addFormPopup').style.display = 'block';
+  }
+
+  // Function to close the Add Category Form
+  function closeAddForm() {
+    document.getElementById('addFormPopup').style.display = 'none';
+  }
+
+  // Function to open the Edit Form for a specific banner
+  function openEditForm(bannerId) {
+    const formId = `editForm${bannerId}`;
+    document.getElementById(formId).style.display = 'block';
+  }
+
+  // Function to hide the Edit Form for a specific banner
+  function hideEditForm(bannerId) {
+    const formId = `editForm${bannerId}`;
+    document.getElementById(formId).style.display = 'none';
+  }
+
+    function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+    function redirectToCoupon() {
+      window.location.href = "/admin/coupon";
+    }
+
+  </script>
+</html>

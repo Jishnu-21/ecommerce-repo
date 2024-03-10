@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global45.css" />
+    <link rel="stylesheet" href="/user-order-details.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial Rounded MT Bold:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="user-orderdetails">
+      <nav class="user-orderdetails-inner">
+        <div class="icon-parent9">
+          <img class="icon32" alt="" src="./public/icon.svg" />
+
+          <div class="brandname32">MarketPlace</div>
+          <div class="user-wrapper6">
+            <b class="user9">User</b>
+          </div>
+          <img class="group-child23" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+        </div>
+      </nav>
+      <section class="rectangle-parent9">
+        <div class="frame-child25"></div>
+        <button class="iconamoonprofile-bold-parent4">
+          <iconify-icon icon="iconamoon:profile" style="color: white;"></iconify-icon>
+          <div class="profile10">Profile</div>
+        </button>
+        <button class="material-symbolsupload-parent4">
+          <iconify-icon icon="material-symbols:upload" style="color: white;"></iconify-icon>
+          <div class="uploads9">Uploads</div>
+        </button>
+        <button class="lets-iconsorder-light-parent4">
+          <iconify-icon icon="lets-icons:order" style="color: white;"></iconify-icon>
+          <b class="orders10">Orders</b>
+        </button>
+
+        <img class="frame-child26" alt="" src="./public/line-12.svg" />
+
+        <div class="brand21">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" 
+          height="32"></iconify-icon>
+          <div class="brandname33">MarketPlace</div>
+        </div>
+        <button class="material-symbolslogout-parent7">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+          <div class="orders10">Logout</div>
+        </button>
+      </section>
+      <div class="order-details1">Order Details</div>
+      <div class="list-group">
+        <div class="header2">
+          <div class="title4">
+            <div class="title5">
+              <div class="text41">Order # <%= order.orderNumber %></div>
+              <div class="label6">
+                <div class="text42"><%= order.status %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details">
+          <div class="detail">
+            <div class="img-text8">
+              <div class="bagde">
+                <iconify-icon icon="uil:calender"></iconify-icon>
+              </div>
+              <div class="sku">Added</div>
+            </div>
+            <div class="range-rover-defender"><%= order.createdAt.toDateString()%></div>
+          </div>
+          <div class="detail">
+            <div class="img-text8">
+              <div class="bagde1">
+                <iconify-icon icon="solar:card-broken"></iconify-icon>
+              </div>
+              <div class="sku">Payment Method </div>
+            </div>
+            <div class="range-rover-defender"><%= order.paymentMethod %></div>
+          </div>
+          <div class="detail">
+            <div class="img-text8">
+              <div class="bagde">
+                <iconify-icon icon="material-symbols:note"></iconify-icon>
+              </div>
+              <div class="sku">Invoice</div>
+            </div>
+            <div class="range-rover-defender">INV- <%= order.orderNumber %></div>
+          </div>
+          <div class="detail3"></div>
+        </div>
+      </div>
+      <div class="list-group1">
+        <div class="text49">Buyer Details</div>
+        <div class="details">
+          <div class="detail">
+            <div class="img-text8">
+              <div class="bagde">
+                <iconify-icon icon="material-symbols:home-outline"></iconify-icon>
+              </div>
+              <div class="sku">Address </div>
+            </div>
+            <div class="rover-defender"><%= order.address %></div>
+          </div>
+          <div class="detail">
+            <div class="img-text8">
+              <div class="bagde">
+                <iconify-icon icon="ic:baseline-email"></iconify-icon>
+              </div>
+              <div class="sku">Email</div>
+            </div>
+            <a class="text53" href="mailto:<%= user.email %>" target="_blank"
+              ><%= user.email %></a
+            >
+          </div>
+          <div class="detail">
+            <div class="img-text8">
+              <div class="bagde">
+                <iconify-icon icon="ic:outline-phone"></iconify-icon>
+              </div>
+              <div class="sku">Phone number</div>
+            </div>
+            <div class="range-rover-defender"><%= user.phone %></div>
+          </div>
+        </div>
+      </div>
+      <div class="list-group2">
+        <form action="/refund" method="post" id="refundForm" >
+          <input type="hidden" name="orderId" value="<%= order._id %>">
+          <% if (order.status === 'Refund') { %>
+            <a type="button" id="refundButton">Refund Requested</a>
+            <% } else { %>
+        <div class="text49">Actions</div>
+        <div class="details2">
+          <div class="request-refund-wrapper">
+            <div class="request-refund">Request Refund</div>
+          </div>
+          <input class="inputinitial1" name:"reason" type="text" />
+
+          <div class="detail7">
+            <button type="submit">Submit</button>
+            <% } %>
+          </div>
+        </div>
+        </form>
+      </div>
+      <div class="orders11">
+        <div class="header3">
+          <div class="title6">
+            <div class="text41">Order List</div>
+          </div>
+        </div>
+        <div class="table1">
+            <div class="col4">
+              <div class="header-cell4">
+                <div class="sku">Product</div>
+              </div>
+              <% order.items.forEach(item => { %>
+              <div class="cell20">
+                <div class="container25">
+                    <img class="img-icon13" src="/<%= item.image %>" />
+                    <div class="desc10">
+                    <div class="range-rover-defender"><%= item.product_name %></div>
+                    <div class="object"><%= item.product_id.categoryName %></div>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+            <div class="col5">
+              <div class="header-cell5">
+                <div class="sku">Seller</div>
+              </div>
+              <% order.items.forEach(item => { %>
+              <div class="cell20">
+                <div class="container27">
+                  <div class="div24"><%= item.seller %></div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+            <div class="col6">
+              <div class="header-cell5">
+                <div class="sku">Quantity</div>
+              </div>
+              <% order.items.forEach(item => { %>
+              <div class="cell20">
+                <div class="container27">
+                  <div class="range-rover-defender"><%= item.quantity %></div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+            <div class="col4">
+              <div class="header-cell4">
+                <div class="sku">Price</div>
+              </div>
+              <% order.items.forEach(item => { %>
+              <div class="cell38">
+                <div class="container27">
+                  <div class="range-rover-defender">Rs: <%= item.product_id.price %></div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+            <div class="col8">
+              <div class="header-cell4">
+                <div class="sku">Total</div>
+              </div>
+              <% order.items.forEach(item => { %>
+              <div class="cell38">
+                <div class="container37">
+                  <div class="range-rover-defender">Rs:<%= item.product_id.price * item.quantity %></div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+          
+          <!-- Subtotal, Tax, and Total -->
+          <div class="table2">
+            <div class="col4">
+              <div class="cell20">
+                <div class="container37">
+                  <div class="sku">Subtotal </div>
+                </div>
+                <div class="defender">Rs:<%= order.total %></div>
+
+              </div>
+              <div class="cell20">
+                <div class="container27">
+                  <div class="sku">Tax</div>
+                </div>
+                <div class="defender">Rs: 6.99 </div>
+
+              </div>
+              <div class="cell20">
+                <div class="container27">
+                  <div class="range-rover-defender">Total</div>
+                </div>
+                <div class="defender">Rs: <%= (order.total + 6.99).toFixed(2) %></div>
+              </div>
+            </div>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+      <div class="list-group3">
+        <div class="header2">
+          <div class="text58">Order Status</div>
+        </div>
+        <div class="body1">
+          <div class="status">
+            <div class="tracker">
+              <div class="bagde6">
+                <iconify-icon icon="mynaui:cart"></iconify-icon>
+              </div>
+              <img class="divider-icon" alt="" src="./public/divider.svg" />
+            </div>
+            <div class="konten">
+              <div class="download-complete">Order Placed</div>
+              <div class="desc-lorem-ipsum">An order has been placed.</div>
+              <div class="ddmmyy-0000"><%= order.createdAt.toDateString()%></div>
+            </div>
+          </div>
+          <div class="status">
+            <div class="tracker">
+              <div class="bagde7">
+                <div class="icon34">
+                  <iconify-icon icon="fluent-mdl2:away-status"></iconify-icon>
+                </div>
+              </div>
+              <img class="divider-icon" alt="" src="./public/divider.svg" />
+            </div>
+            <div class="konten">
+                <div class="download-complete">
+                    <% if (order.status === 'Delivered') { %>
+                        <div>Item Delivered</div>
+                    <% } else if (order.status === 'Pending') { %>
+                        <div>Arriving</div>
+                        <% } else if (order.status === 'Refund') { %>
+                          <div>Processing for Refund</div>
+                    <% } else { %>
+                        <div>Cancelled</div>
+                    <% } %>
+                </div>
+            </div>            
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global78.css" />
+    <link rel="stylesheet" href="/cart1.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial Rounded MT Bold:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="cart1">
+      <a
+        class="all-rights-reserved-container7"
+        href="https://visiata.com/"
+        target="_blank"
+      >
+        <span>
+          <span>© All rights reserved | Made with </span>
+          <b class="b22">❤️ </b>
+          <span class="b22">by </span>
+        </span>
+        <span class="visiata-systems-international7"
+          >Visiata Systems International</span
+        >
+      </a>
+      <div class="cart-inner1">
+        <div class="you-may-also-like-frame">
+          <div class="you-may-also2">You may also like</div>
+        </div>
+      </div>
+      <div class="saving-to-celebrate-group">
+        <div class="you-may-also2">Saving to celebrate</div>
+        <div class="enjoy-up-to1">
+          Enjoy up to 60% off thousands of styles during the End of Year sale -
+          while suppiles last. No code needed.
+        </div>
+      </div>
+      <div class="card-24">
+        <img
+          class="mask-group-icon17"
+          alt=""
+          src="./public/mask-group@2x.png"
+        />
+
+        <div class="card-2-inner1">
+          <div class="jeep-offroad-model-container">
+            <div class="jeep-offroad-model3">Jeep Offroad Model</div>
+            <div class="max-obj9">.max, obj , Fbx</div>
+            <b class="b23">$20</b>
+          </div>
+        </div>
+        <div class="material-symbolsdelete-outlin-parent">
+          <img
+            class="material-symbolsdelete-outlin-icon6"
+            alt=""
+            src="./public/materialsymbolsdeleteoutline.svg"
+          />
+
+          <img
+            class="material-symbolsedit-outline-icon4"
+            alt=""
+            src="./public/materialsymbolseditoutline.svg"
+          />
+        </div>
+      </div>
+      <div class="frame-parent27">
+        <% if (user.cart.items.length > 0) { %>
+        <div class="order-summary-container">
+          <div class="you-may-also2">Order Summary</div>
+          <div class="frame-parent28">
+            <div class="items-group">
+              <div class="you-may-also2"><%= user.cart.items.length %> ITEMS</div>
+              <div class="div51">Rs: <%= (user.cart.items.reduce((total, item) => total + item.product_id.price * item.quantity, 0)).toFixed(2) %></div>
+            </div>
+            <div class="sales-tax-container">
+              <div class="you-may-also2">Sales Tax</div>
+              <div class="div51">Rs 6.99</div>
+            </div>
+            <div class="total-container">
+              <div class="you-may-also2">Total</div>
+              <div class="div51">Rs: <%= ((user.cart.items.reduce((total, item) => total + item.product_id.price * item.quantity, 0)) + 6.99).toFixed(2) %></div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+        <button class="button71">
+          <div class="style-layer26">
+            <div class="button72">Checkout</div>
+          </div>
+        </button>
+      </div>
+      <footer class="footer9">
+        <div class="columns8">
+          <div class="column39">
+            <div class="column39">
+              <div class="brand24">
+                <img class="icon37" alt="" src="./public/icon.svg" />
+
+                <div class="brandname36">MarketPlace</div>
+              </div>
+            </div>
+          </div>
+          <div class="small-columns8">
+            <div class="column41">
+              <div class="content25">
+                <b class="company8">COMPANY</b>
+                <div class="footer-links24">
+                  <div class="company8">How it works</div>
+                  <div class="company8">Pricing</div>
+                  <div class="company8">Demo</div>
+                </div>
+              </div>
+            </div>
+            <div class="column41">
+              <div class="content25">
+                <b class="company8">RESOURCES</b>
+                <div class="footer-links24">
+                  <div class="company8">Blog post name goes here</div>
+                  <div class="company8">Blog post name goes here</div>
+                  <div class="company8">See all resources</div>
+                </div>
+              </div>
+            </div>
+            <div class="column41">
+              <div class="content25">
+                <b class="company8">ABOUT</b>
+                <div class="footer-links24">
+                  <div class="link70">Terms & Conditions</div>
+                  <div class="link70">Privacy Policy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright8">
+          <div class="text163">Copyright © 2023 Company name</div>
+        </div>
+      </footer>
+      <div class="card-1-group">
+        <div class="card-15">
+          <div class="card-1-child2"></div>
+          <div class="robots1">Robots</div>
+          <div class="max-obj10">.max, obj , Fbx</div>
+          <div class="wrapper11">
+            <div class="div54">$45</div>
+          </div>
+          <img
+            class="mask-group-icon18"
+            alt=""
+            src="./public/mask-group@2x.png"
+          />
+        </div>
+        <div class="card-41">
+          <div class="card-4-item"></div>
+          <div class="rainbow1">Rainbow</div>
+          <div class="unreal3">unreal</div>
+          <div class="wrapper12">
+            <div class="div55">$19</div>
+          </div>
+          <img
+            class="mask-group-icon18"
+            alt=""
+            src="./public/mask-group@2x.png"
+          />
+        </div>
+        <div class="card-25">
+          <div class="card-4-item"></div>
+          <div class="rainbow1">Architect</div>
+          <div class="obj3">obj</div>
+          <div class="wrapper13">
+            <div class="div56">$2</div>
+          </div>
+          <img
+            class="mask-group-icon18"
+            alt=""
+            src="./public/mask-group@2x.png"
+          />
+        </div>
+        <div class="card-34">
+          <div class="card-3-child2"></div>
+          <div class="camera1">Camera</div>
+          <div class="obj-fbx1">obj , Fbx</div>
+          <div class="wrapper14">
+            <div class="div55">$18</div>
+          </div>
+          <img
+            class="mask-group-icon21"
+            alt=""
+            src="./public/mask-group@2x.png"
+          />
+        </div>
+      </div>
+      <div class="your-bag-group">
+        <div class="you-may-also2">Your Bag</div>
+        <div class="items-in-your1">
+          Items in your bag not reserved- check out now to make them yours.
+        </div>
+      </div>
+      <nav class="cart-inner2">
+        <div class="icon-parent10">
+          <img class="icon38" alt="" src="./public/icon.svg" />
+
+          <div class="brandname37">MarketPlace</div>
+          <div class="user-wrapper7">
+            <b class="user10">User</b>
+          </div>
+          <img class="group-child33" alt="" src="./public/ellipse-1@2x.png" />
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>

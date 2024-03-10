@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="/global6.css" />
+    <link rel="stylesheet" href="/userProfile.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="profile">
+        <nav class="profile-inner">
+          <div class="icon-parent">
+            <img class="icon" alt="" src="./public/icon@2x.png" />
+            <div class="brandname">MarketPlace</div>
+            <div class="notifications-fill0-wght400-gr-parent">
+              <button class="notifications-fill0-wght400-gr">
+                <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>            
+              </button>
+              <div class="group-child"></div>
+            </div>
+            <div class="user-wrapper">
+              <b class="user"><%= user ? user.name : 'Unknown' %></b>
+            </div>
+            <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+          </div>
+        </nav>
+        <div class="profile2">Profile</div>
+        <div class="rectangle-parent">
+          <div class="frame-child"></div>
+          <div class="iconamoonprofile-bold-parent">
+            <iconify-icon icon="iconamoon:profile" style="color: white;"></iconify-icon>
+            <button class="profile3">Profile</button>
+          </div>
+          <div class="material-symbolsupload-parent">
+            <iconify-icon icon="material-symbols:upload" style="color: white;"></iconify-icon>
+
+            <button onclick="redirectToUploads()" class="uploads">Uploads</button>
+          </div>
+          <div class="lets-iconsorder-light-parent">
+            <iconify-icon icon="lets-icons:order" style="color: white;"></iconify-icon>
+            <button onclick="redirectToOrders()" class="uploads">Orders</button>
+          </div>
+
+          <img class="frame-item" alt="" src="./public/line-12@2x.png" />
+          <div class="brand">
+            <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" 
+            height="32"></iconify-icon>
+            <button class="brandname1">MarketPlace</button>
+          </div>
+          <div class="material-symbolslogout-parent">
+            <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+            <a href="/signout">
+              <button class="uploads">Logout</button>
+              </a>
+          </div>
+        </div>
+        <img class="vector-icon3" alt="" src="./public/vector@2x.png" />
+       
+        <% if (productsListed > 0) { %>
+          <div class="metrics-container">
+            <!-- Total Sales -->
+            <div class="metric-card">
+              <h3>Total Revenue </h3>
+              <p>Rs <%= sellerSalesInfo.totalRevenue.toFixed(2) %></p>
+            </div>
+        
+            <!-- Total Orders -->
+            <div class="metric-card">
+              <h3>Products Listed</h3>
+              <p> <%= productsListed %></p>
+            </div>
+        
+            <!-- Total Users -->
+            <div class="metric-card">
+              <h3>Products Sold</h3>
+              <p> <%= sellerSalesInfo.totalQuantity %></p>
+            </div>
+          </div>
+        <% } %>
+        
+
+        
+        <div class="frame-parent">
+            <input class="frame-inner" type="text" />
+            <div class="profile-container">
+                <div class="profile-item" id="usernameItem">
+                    <div class="label">Username</div>
+                    <div class="value" id="usernameValue"><%= user.name %></div>
+                </div>
+                <div class="profile-item" id="emailItem">
+                    <div class="label">Email</div>
+                    <div class="value" id="emailValue"><%= user.email %></div>
+                </div>
+                <div class="profile-item" id="phoneItem">
+                    <div class="label">Phone</div>
+                    <div class="value" id="phoneValue"><%= user.phone %></div>
+                </div>
+                <div class="profile-item" id="addressItem">
+                  <div class="label">Address</div>
+                  <div class="value" id="addressValue">
+                      <% user.address.forEach((address, index) => { %>
+                          <div><%= address %></div>
+                      <% }); %>
+                  </div>
+              </div>
+            </div>
+            <button class="editbutton" onclick="showEditForm()">Edit Profile</button>
+            <button class="addbutton" type="Addbutton" onclick="showAddForm()">Add Address</button>
+            <button class="changePassword" onclick="showChangePasswordForm()">changePassword</button>
+
+        </div>
+        <!-- Edit form (initially hidden) -->
+        <form action="/saveProfilechanges" method="post" id="editForm"  enctype="multipart/form-data" style="display: none;">
+            <input type="file" name="newPhoto" id="newPhoto" accept="image/*" />
+            <input type="text" name="newUsername" id="newUsername" placeholder="New Username" value="<%= user.name %>" />
+            <input type="text" name="newEmail" id="newEmail" placeholder="New Email" value="<%= user.email %>" />
+            <input type="text" name="newPhone" id="newPhone" placeholder="New Phone" value="<%= user.phone %>" />
+            <% user.address.forEach((address, index) => { %>
+              <input type="text" name="newAddress<%= index %>" id="newAddress<%= index %>" placeholder="New Address" value="<%= address %>" />
+          <% }); %>
+            <button  type="submit">Save Changes</button>
+            <div class="hideEdit">
+            <button  type="button" onclick="hideEditForm()">Cancel</button>
+            </div>
+        </form>
+         
+
+  
+        <form action="/addAddress" method="post" id="addForm" style="display: none;">
+          <input type="text" name="address" id="newUsername" placeholder="Address" />
+          <button type="submit">Save Changes</button>
+          <div class="hideEdit">
+            <button type="button" onclick="hideAddForm()">Cancel</button>
+          </div>
+        </form>
+
+
+
+        <form  action="/changePassword" method="post" id="changePasswordForm" style="display: none;">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" name="currentPassword" required>
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>        
+            <button type="submit">Save Changes</button>
+            <div class="hideEdit">
+              <button  type="button" onclick="hideChangePasswordForm()">Cancel</button>
+          </div>
+          <% if (error) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= error %>
+            </div>
+          <% } %>         
+        </form>
+
+    <img class="profile-child" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+<script>
+    function showEditForm() {
+        // Hide profile items
+        document.querySelectorAll('.changePassword,.profile-item,.editbutton,.addbutton').forEach(item => {
+            item.style.display = 'none';
+        });
+        // Show edit form
+        document.getElementById('editForm').style.display = 'block';
+    }    
+    function hideEditForm() {
+        // Hide edit form
+        document.getElementById('editForm').style.display = 'none';
+
+        // Show profile items
+        document.querySelectorAll('.changePassword,.profile-item, .editbutton, .addbutton').forEach(item => {
+            item.style.display = ''; // Assuming your display property for profile-item is flex
+        });
+    }
+
+    function showAddForm() {
+        // Hide profile items, edit button, and add button
+        document.querySelectorAll('.profile-item, .editbutton, .addbutton').forEach(item => {
+            item.style.display = 'none';
+        });
+
+        // Show add form
+        document.getElementById('addForm').style.display = 'block';
+    }    
+
+    function hideAddForm() {
+        // Hide add form
+        document.getElementById('addForm').style.display = 'none';
+
+        // Show profile items, edit button, and add button
+        document.querySelectorAll('.changePassword,.profile-item, .editbutton, .addbutton').forEach(item => {
+            item.style.display = ''; // Assuming your display property for profile-item is flex
+        });
+    }
+   
+    function showChangePasswordForm() {
+    // Hide profile items, edit button, and add button
+    document.querySelectorAll('.changePassword,.profile-item, .editbutton, .addbutton').forEach(item => {
+        item.style.display = 'none';
+    });
+
+    // Show change password form
+    document.getElementById('changePasswordForm').style.display = 'block';
+  }
+function hideChangePasswordForm() {
+    // Hide change password form
+    document.getElementById('changePasswordForm').style.display = 'none';
+
+    // Show profile items, edit button, and add button
+    document.querySelectorAll('.changePassword,.profile-item, .editbutton, .addbutton').forEach(item => {
+        item.style.display = ''; // Assuming 'block' is the default
+    });
+}
+
+ 
+   
+
+    function redirectToUploads() {
+      window.location.href = "/users/Uploads";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/users/orders";
+    }
+
+</script>
+</body>
+</html>

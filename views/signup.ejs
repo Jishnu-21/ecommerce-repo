@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="sign-up">
+      <div class="frame-parent">
+        <div class="sign-up-wrapper">
+          <div class="sign-up1">Sign up</div>
+        </div>
+        <form action="/signup" class="login-container" method="POST">
+        <input
+          class="input-fields"
+          name="email"
+          placeholder="Email"
+          type="email"
+          required="true"
+        />
+        <br>
+        <input
+          class="input-fields"
+          name="name"
+          placeholder="Username"
+          type="text"
+          required="true"
+        />
+        <br>
+        <input
+        class="input-fields"
+        name="phone"
+        placeholder="Phone"
+        type="text"
+        required="true"
+         />
+        <br>
+        <input
+          class="input-fields"
+          name="address"
+          placeholder="Address"
+          type="text"
+          required="true"
+        />
+        <br>
+        <input
+          class="input-fields"
+          name="password"
+          placeholder="Password"
+          type="password"
+          required="true"
+        />
+        <br>
+        <div class="input-fields4">
+          <div class="inputinitial-parent">
+            <input
+              class="inputinitial"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              type="password"
+              required="true"
+            />
+            <br>
+          </div>
+        </div>
+        <a class="link" href="/login" >Already have an account?</a><br />
+        <button class="button-wrapper" type="submit">
+          <br>
+          <div class="button">
+            <div class="style-layer">
+              <div class="button1">SIGN UP</div>
+              <iconify-icon icon="maki:arrow" style="color: white;" width="15" height="15"></iconify-icon>
+            </div>
+          </div>
+        </button>
+        <p id="errorMessage" style="color: red;">
+          <%= errorMessage || '' %>
+        </p>
+      </form>
+        <div class="by-clicking-sign-container">
+          By clicking 'Sign up' you agree to our websites
+          <a class="link2" href = "#">Privacy Notice</a> and
+          <a class="link2" href="#">Terms & Conditions</a>.
+        </div>
+      </div>
+      <div class="image-14-parent">
+        <img class="image-14-icon" alt="" src="public/icon@2x.jpg" />
+        <div class="benefits-image-dalle">
+          <div class="brand">
+            <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="43" height="43"></iconify-icon>
+            <div class="brandname">MarketPlace</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Check for errorMessage parameter and display alert
+    var errorMessage = getParameterByName('errorMessage');
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-dashboard">
+      <main class="fluent-mdl2accept-parent">
+        <h1>Products </h1>
+        <table border="2">
+          <thead>
+            <tr>
+              <th>Product Id</th>
+              <th>Product </th>
+              <th>Name</th>
+              <th>seller name</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(product => { %>
+              <tr>
+                <td><%= product.product_id %></td>
+                <td><img class="productimg" alt="" src="/<%= product.images[0].path.replace(/\\/g, '/') %>" /></td>
+                <td><%= product.name %></td>
+                <td><%= product.seller_name %></td>
+                <td><%= product.categoryName %></td>
+                <td><%= product.description %></td>
+                <td>Rs. <%= product.price %></td>
+                <td>
+                  <form action="/product/status" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to perform this action?');">
+                    <input type="hidden" name="product_id" value="<%= product.product_id %>">
+                      <input type="hidden" name="status" value="<%= product.status === 'softDeleted' ? 'Active' : 'softDeleted' %>">
+                      <button class="block-button" type="submit">
+                          <%= product.status === 'softDeleted' ? 'Activate' : 'Soft Delete' %>
+                      </button>
+                  </form>
+              </td>
+                </td>
+              </tr>        
+            <% }); %>
+          </tbody>
+        </table>
+      </main> 
+      <nav class="nav">
+        <b class="admin">Admin</b>
+        <ol class="notifications-fill0-wght400-gr-wrapper">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" style="color: black;" width="22" height="28"></iconify-icon>            
+            </button>
+        </ol>
+      </nav>
+      <section class="frame-parent">
+        <div class="line-vertical"></div>
+        <div class="akar-iconsdashboard-parent">
+          <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToDash()">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+          <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="bi:bar-chart-fill" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToOrders()">Orders</button>
+        </div>
+        <div class="mingcutecoupon-line-parent">
+          <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>                          
+          <button class="products" onclick="redirectToCoupons()">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+          <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToBanner()">Banner Management</button>
+        </div>
+        <div class="material-symbolslogout-parent">
+          <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+                <a href="/signout">
+          <button class="products">Logout</button>
+                </a>
+        </div>
+        <div class="frame-item"></div>
+        <div class="brand">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="43" height="43"></iconify-icon>
+          <div class="brandname">MarketPlace</div>
+        </div>
+        <div class="mdiuser-outline-parent">
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToUsers()">Users</button>
+        </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+    function redirectToCoupons() {
+      window.location.href = "/admin/coupon";
+    }
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+
+    
+    function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+  </script>
+</html>

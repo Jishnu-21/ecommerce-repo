@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <!-- Your CSS links -->
+    <link rel="stylesheet" href="/global7.css" />
+    <link rel="stylesheet" href="/checkout.css" />
+    <!-- Your Google Fonts links -->
+    
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<div class="check-out">
+    <% if (user.cart.items.length > 0) { %>
+    <form action="/ordercheckout" id="checkoutForm" method="post">
+        <div class="frame-parent">
+            <div class="frame-wrapper">
+                <% if (user.cart.items.length > 0) { %>
+                    <div class="order-summary-parent">
+                        <div class="order-summary">Order Summary</div>
+                        <div class="frame-group">
+                            <div class="item-parent">
+                                <div class="you-may-also"><%= user.cart.items.length %> ITEMS</div>
+                                <div class="div">Rs:<%= (user.cart.subTotal).toFixed(2) %></div>
+                            </div>
+                            <div class="item-parent">
+                                <div class="order-summary">Sales Tax</div>
+                                <div class="div">Rs: 6.99</div>
+                            </div>
+                            <div class="total-parent">
+                                <div class="order-summary">Total</div>
+                                <div class="subTotal">Rs: <%= (user.cart.subTotal + 6.99).toFixed(2) %></div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>       
+            <div class="coupon-container">
+                <input type="hidden" name="paymentStatus" id="paymentStatus" value="Pending">
+                <label for="coupon" id="coupon-label" class="coupon-label">Coupon</label>
+                <input id="coupon" class="coupon-input" placeholder="Coupon code">
+                <button type="button" id="applyCouponButton" onclick="applyCoupon()">Apply Coupon</button>
+            </div>              
+        </div>
+       
+        <div class="frame-div">
+            <div class="address-cards">
+                <a>Your Addresses</a>
+                <% user.address.forEach((address, index) => { %>
+                    <div class="address-card">
+                        <br>
+                        <input type="radio" id="address<%= index %>" name="selectedAddress" value="<%= index %>" <%= index === 0 ? 'checked' : '' %>>
+                        <label for="address<%= index %>"><%= address %></label>
+                    </div>
+                <% }); %>
+            </div>
+        </div>      
+        <button type="button" class="button" onclick="handlePaymentSelection()">
+            <div class="style-layer">
+                <div class="button1">Review AND PAY</div>
+            </div>
+        </button>
+        <div class="check-out-inner">
+            <div class="icon-parent">
+                <iconify-icon icon="solar:bag-smile-bold" style="color: black;" width="32" height="32"></iconify-icon>
+                <div class="brandname1">MarketPlace</div>
+                <a>
+                    <div class="notifications-fill0-wght400-gr-parent">
+                        <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>
+                        <div class="group-child"></div>
+                    </div>
+                    <div class="user-wrapper">
+                        <b class="user"><%= user ? user.name : 'Guest' %></b>
+                    </div>
+                    <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>">
+                </a>
+            </div>
+        </div>
+        <div class="payment-method-parent">
+            <div class="payment-method">Payment Method</div>
+            <div class="group-inner">
+                <input type="radio" id="cashOnDelivery" name="payment" value="cashOnDelivery" <% if (user.cart.subTotal + 6.99 < 1000) { %> disabled <% } %> checked>
+                <label for="cashOnDelivery">Cash on Delivery</label>
+                <input type="radio" id="creditCard" name="payment" value="creditCard">
+                <label for="creditCard">Razorpay</label>
+            </div>
+            <div class="select-any-payment">Select any payment method</div>
+            <div class="internet-charges-may">*Internet Charges may apply</div>
+        </div>
+        
+    </form>
+    <div class="frame-div2">
+        <button class="editButton" type="button" onclick="showEditForm()"><iconify-icon icon="material-symbols:edit" width="15" height="15"  style="color: black"></iconify-icon></button>
+        <button class="addbutton" type="Addbutton" onclick="showAddForm()"><iconify-icon icon="material-symbols:add" width="15" height="15"  style="color: black"></iconify-icon></button>
+
+
+        <div id="editFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="hideEditForm()">&times;</span>
+                <form action="/editAddress" method="post">
+                    <h1>Edit Addess</h1>
+                    <select id="editAddressSelect" name="editAddressSelect">
+                        <% user.address.forEach((address, index) => { %>
+                            <option value="<%= index %>"><%= address %></option>
+                        <% }); %>
+                    </select>
+                    <!-- Allow editing the selected address -->
+                    <input type="text" name="editedAddress" id="editedAddress" placeholder="Edit Address" />
+                
+                    <!-- Add a save button to submit the form -->
+                    <button type="submit">Save Changes</button>   
+                 </form>
+            </div>
+        </div>
+
+        <div id="addFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="hideAddForm()">&times;</span>
+                <form action="/addAddress" method="post">
+                    <h1>Add Address</h1>
+                    <label>Address</label>
+                    <input type="text" name="address" id="newUsername" placeholder="Address" />
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+        <div class="error-message">Your cart is empty. Redirecting to cart...</div>
+        <script>
+            // Redirecting to the cart page
+            setTimeout(function() {
+                window.location.href = "/users/userCart"; // Adjust the URL as per your application's routing
+            }, 1000); // Redirect after 3 seconds, adjust the time as needed
+        </script>
+    <% } %>
+</div>
+<script>
+
+// Function to display the edit form modal
+function showEditForm() {
+    document.getElementById('editFormModal').style.display = 'block';
+}
+
+// Function to hide the edit form modal
+function hideEditForm() {
+    document.getElementById('editFormModal').style.display = 'none';
+}
+
+// Function to display the add form modal
+function showAddForm() {
+    document.getElementById('addFormModal').style.display = 'block';
+}
+
+// Function to hide the add form modal
+function hideAddForm() {
+    document.getElementById('addFormModal').style.display = 'none';
+}
+
+    
+    function initiateRazorpayPayment(amount) {
+        var options = {
+            "key": "rzp_test_zeV9gelrYa3j9L", // Access environment variable
+            "amount": amount  * 100, // Amount in paise
+            "currency": "INR", // Change as per your currency
+            "name": "MarketPlace",
+            "description": "Purchase Description",
+            "image": "/your_logo.png", // Add your logo URL
+            "handler": function (response) {
+                console.log(response);
+                if (response.razorpay_payment_id) {
+                    document.getElementById("checkoutForm").submit();
+                } else {
+                    document.getElementById("paymentStatus").value = "Failed";
+                    document.getElementById("checkoutForm").submit();            
+                    alert("Payment failed. Please try again or choose another payment method.");
+                }
+            },
+            "prefill": {
+                "name": "Customer Name",
+                "email": "customer@example.com"
+            },
+            "theme": {
+                "color": "#3399cc" // Change as per your theme
+            }
+        };
+        var rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response){
+            alert("Payment failed. Please try again or choose another payment method.");
+            document.getElementById("paymentStatus").value = "Failed";
+           document.getElementById("checkoutForm").submit();     
+});
+        rzp.open();
+    }
+    
+    function handlePaymentSelection() {
+    var paymentMethod;
+
+    // Find out which radio button is checked
+    var paymentRadios = document.getElementsByName('payment');
+    for (var i = 0; i < paymentRadios.length; i++) {
+        if (paymentRadios[i].checked) {
+            paymentMethod = paymentRadios[i].value;
+            break;
+        }
+    }
+
+    if (paymentMethod === "creditCard") {
+        var totalAmount = parseFloat(document.querySelector('.subTotal').textContent.replace('Rs:', ''));
+        initiateRazorpayPayment(totalAmount);
+    } else {
+        // For other payment methods like Cash on Delivery
+        document.getElementById("checkoutForm").submit();
+    }
+}
+
+    var couponApplied = false; // Global variable to track whether the coupon has been applied
+
+    async function applyCoupon() {
+    // Check if the coupon has already been applied
+    if (couponApplied) {
+        alert("Coupon has already been applied.");
+        return;
+    }
+
+    const couponCode = document.getElementById("coupon").value;
+
+    // Send an AJAX request to the server to validate the coupon
+    const response = await fetch('/validateCoupon', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ couponCode })
+    });
+
+    if (response.ok) {
+        const coupon = await response.json();
+
+        // Check if the total meets the minimum price requirement of the coupon
+        const totalAmount = parseFloat(document.querySelector('.subTotal').textContent.replace('Rs:', ''));
+        if (totalAmount < coupon.minimumPrice) {
+            alert(`Coupon can only be applied for orders of Rs:${coupon.minimumPrice} or more.`);
+            return;
+        }
+
+        // Calculate the discounted total
+        const discountPercentage = coupon.discountPercentage;
+        const originalTotal = parseFloat(document.querySelector('.div').textContent.replace('Rs:', ''));
+        const discountedTotal = originalTotal * (1 - discountPercentage / 100);
+
+        // Update the order total on the page
+        document.querySelector('.div').textContent = `Rs:${discountedTotal.toFixed(2)}`;
+
+        // Update user.subTotal value
+        const subtotalElement = document.querySelector('.subTotal'); // Assuming there's an element with class 'subTotal' displaying the subtotal
+        const currentSubTotal = parseFloat(subtotalElement.textContent.replace('Rs:', ''));
+        const newSubTotal = currentSubTotal - (originalTotal - discountedTotal);
+        subtotalElement.textContent = `Rs:${newSubTotal.toFixed(2)}`;
+
+        alert("Coupon applied successfully!");
+
+        // Call function to save the discounted total to the order in the backend
+        await saveDiscountedTotal(discountedTotal);
+
+        // Mark the coupon as applied
+        couponApplied = true;
+        document.getElementById("applyCouponButton").style.display = "none";
+        document.getElementById("coupon").style.display = "none";
+        document.getElementById("coupon-label").style.display = "none";
+
+    } else {
+        alert("Invalid coupon code. Please try again.");
+    }
+}
+
+
+
+    async function saveDiscountedTotal(discountedTotal) {
+    // Send an AJAX request to the server to update the order total
+    const response = await fetch('/updateOrderTotal', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ discountedTotal })
+    });
+
+    if (!response.ok) {
+        console.error('Failed to update order total:', response.statusText);
+    }
+}
+
+</script>
+</body>
+</html>

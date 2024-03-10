@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global6.css" />
+    <link rel="stylesheet" href="/cart.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="cart">
+      <div class="cart-inner">
+        <div class="you-may-also-like-wrapper">
+        </div>
+      </div>
+      </div>
+      <div class="saving-to-celebrate-parent">
+        <div class="you-may-also">Saving to celebrate</div>
+        <div class="enjoy-up-to">
+          Unlock exclusive discounts! Use coupons to save big
+        </div>
+      </div>
+     
+      <div class="your-bag-parent">
+        <div class="you-may-also">Your Bag</div>
+        <div class="items-in-your">
+          <% if (user.cart.items.length > 0) { %>
+            Items in your bag not reserved - check out now to make them yours.
+        <% } else { %>
+            Your cart is currently empty.
+        <% } %>
+        </div>
+      </div>
+      <nav class="cart-child">
+        <div class="icon-parent">
+          <iconify-icon icon="solar:bag-smile-bold" style="color: black;" width="32" 
+           height="32"></iconify-icon>
+          <div class="brandname1">MarketPlace</div>
+          <div class="notifications-fill0-wght400-gr-parent">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>
+          </div>
+          <div class="user-wrapper">
+            <b class="user"><%= user ? user.name : 'Guest' %></b>
+          </div>
+          <img class="group-item" alt="" src="<%= user.photo ? `/uploads/${user.photo}` : '/uploads/default.jpg' %>" />
+        </div>
+      </nav>
+      <div class="cart-item">
+        <% user.cart.items.forEach(item => { %>
+          <div class="cart-item-details">
+            <img class="image" src="../<%= item.product_id.images[0].path %>" alt="<%= item.product_id.images[0].name %>">
+            
+            <div class="item-details">
+              <div class="item-name"><%= item.product_id.name %></div>    
+              <div class="item-price">Price: <%= item.product_id.price %></div>
+              <div class="quantity-selector">
+                <label for="quantity">Quantity:</label>
+                <div class="quantity-controls" data-product-id="<%= item.product_id._id %>">
+                  <button class="quantity-decrease" onclick="updateQuantity(this, -1)">-</button>
+                  <span class="displayed-quantity"><%= item.quantity %></span>
+                  <button class="quantity-increase" onclick="updateQuantity(this, 1)">+</button>
+                </div>
+              </div>
+            </div>
+      
+            <form action="/removeFromCart" method="post">
+              <input type="hidden" name="productId" value="<%= item.product_id._id %>">
+              <button class="button-remove" type="submit">Remove</button>
+            </form>
+          </div>
+        <% }); %>
+      </div>
+
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <% for(let i = 1; i <= totalPages; i++) { %>
+            <li class="page-item<%= i == currentPage ? ' active' : '' %>">
+              <a class="page-link" href="/userCart?page=<%= i %>"><%= i %></a>
+            </li>
+          <% } %>
+        </ul>
+      </nav>
+
+      
+      
+      <div class="frame-parent">
+        <% if (user.cart.items.length > 0) { %>
+          <div class="order-summary-parent">
+            <div class="you-may-also">Order Summary</div>
+            <div class="frame-group">
+              <div class="items-parent">
+                <div class="you-may-also"><%= user.cart.items.length %> ITEMS</div>
+                <div class="div subtotal" id="subtotal">Rs:<%= (user.cart.items.reduce((total, item) => total + item.product_id.price * item.quantity, 0)).toFixed(2) %></div>
+              </div>
+              <div class="sales-tax-parent">
+                <div class="you-may-also">Sales Tax</div>
+                <div class="div">Rs:6.99</div> <!-- You can replace this with the actual sales tax -->
+              </div>
+              <div class="total-parent">
+                <div class="you-may-also">Total</div>
+                <div class="div total" id="total">Rs:<%= ((user.cart.items.reduce((total, item) => total + item.product_id.price * item.quantity, 0)) + 6.99).toFixed(2) %></div>
+              </div>
+              <button onclick="redirectToCheckout()" class="button2">
+                <div class="style-layer">
+                  <div class="button3">Checkout</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+    
+    <footer class="footer">
+      <div class="columns">
+        <div class="column">
+          <div class="column">
+            <div class="brand">
+              <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" 
+              height="32"></iconify-icon>
+              <div class="brandname">MarketPlace</div>
+            </div>
+          </div>
+        </div>
+        <div class="small-columns">
+          <div class="column2">
+            <div class="content">
+              <b class="company">COMPANY</b>
+              <div class="footer-links">
+                <div class="company">How it works</div>
+                <div class="company">Pricing</div>
+                <div class="company">Demo</div>
+              </div>
+            </div>
+          </div>
+          <div class="column2">
+            <div class="content">
+              <b class="company">RESOURCES</b>
+              <div class="footer-links">
+                <div class="company">Blog post name goes here</div>
+                <div class="company">Blog post name goes here</div>
+                <div class="company">See all resources</div>
+              </div>
+            </div>
+          </div>
+          <div class="column2">
+            <div class="content">
+              <b class="company">ABOUT</b>
+              <div class="footer-links">
+                <div class="link6">Terms & Conditions</div>
+                <div class="link6">Privacy Policy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="text">Copyright © 2023 Company name</div>
+      </div>
+    </footer>
+    <script>
+      // Function to redirect to checkout page
+      function redirectToCheckout() {
+        window.location.href = "/users/checkout";
+      }
+      function updateQuantity(button, change) {
+    const quantityElement = button.parentElement.querySelector('.displayed-quantity');
+    let currentQuantity = parseInt(quantityElement.textContent);
+    currentQuantity += change; // Increase or decrease the quantity
+    const prices = document.querySelectorAll('.price');
+
+    if (currentQuantity < 1) return; // Prevent negative quantity
+
+    quantityElement.textContent = currentQuantity; // Update displayed quantity
+
+    const productId = quantityElement.parentElement.dataset.productId;
+
+    fetch('/updateQuantity', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            productId: productId,
+            quantity: currentQuantity,
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const subtotalElement = document.getElementById('subtotal');
+        const totalElement = document.getElementById('total');
+        subtotalElement.textContent = 'Rs:' + data.subtotal.toFixed(2);
+        totalElement.textContent = 'Rs:' + data.total.toFixed(2);
+    })
+    .catch(error => {
+        console.error('Error updating quantity:', error);
+        // Revert the displayed quantity to the previous value
+        quantityElement.textContent = currentQuantity - change;
+    });
+    location.reload()
+  }
+    </script>    
+  </body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="/global22.css" />
+    <link rel="stylesheet" href="/adminOrders.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial Rounded MT Bold:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-categories-abstract">
+      <div class="nav">
+        <div class="nav-child"></div>
+        <div class="admin-wrapper">
+          <b class="admin">Admin</b>
+        </div>
+        <div class="notifications-fill0-wght400-gr-parent">
+          <button class="notifications-fill0-wght400-gr">
+            <iconify-icon icon="iconamoon:notification-light" width="32" height="32"></iconify-icon>            
+          </button>
+          <div class="group-child"></div>
+        </div>
+      </div>
+      <div class="rectangle-parent">
+        <div class="frame-child"></div>
+        <div class="akar-iconsdashboard-parent">
+            <iconify-icon icon="akar-icons:dashboard" style="color: white;" width="24" height="24"></iconify-icon>
+
+          <button class="dashboard" onclick="redirectToDash()">Dashboard</button>
+        </div>
+        <div class="fluent-mdl2product-parent">
+            <iconify-icon icon="fluent-mdl2:product" style="color: white;" width="24" height="24"></iconify-icon>
+            <button class="products"  onclick="redirectToProducts()">Products</button>
+        </div>
+        <div class="fluent-mdl2product-group">
+          <div class="akar-iconsdashboard"></div>
+          <iconify-icon icon="mdi:user" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToUsers()">Users</button>
+        </div>
+        <div class="icon-park-outlinesales-report-parent">
+          <iconify-icon icon="lets-icons:order" style="color: white;" width="24" height="24"></iconify-icon>                          
+          <button class="products"  onclick="redirectToOrders()">Orders</button>
+          </div>
+        <div class="mingcutecoupon-line-parent">
+            <iconify-icon icon="mingcute:coupon-line" style="color: white;" width="24" height="24"></iconify-icon>               
+
+          <button class="products" onclick="redirectToCoupons()">Coupons/Promos</button>
+        </div>
+        <div class="iconamooncategory-parent">
+          <iconify-icon icon="iconamoon:category" style="color: white;" width="24" height="24"></iconify-icon>
+          <button class="products" onclick="redirectToCategory()">Category Management</button>
+        </div>
+        <div class="material-symbolsplanner-banne-parent">
+            <iconify-icon icon="material-symbols:planner-banner-ad-pt-outline" style="color: white;" width="24" height="24"></iconify-icon>
+            <span onclick="redirectToBanner()" style="color: black; cursor: pointer;">Banner Management</span>
+          </div>
+        <div class="frame-item"></div>
+        <div class="material-symbolslogout-parent">
+            <iconify-icon icon="material-symbols:logout" style="color: white;" width="24" height="24"></iconify-icon>
+            <a href="/signout">
+            <button class="products">Logout</button>
+            </a>
+        </div>
+        <div class="frame-inner"></div>
+        <div class="brand">
+            <iconify-icon icon="solar:bag-smile-bold" style="color: white;" width="32" height="32"></iconify-icon>
+
+          <div class="brandname">MarketPlace</div>
+        </div>
+      </div>
+      <div class="admin-categories-abstract-child">
+        <h1>Orders</h1>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Order Number</th>
+              <th>Buyer</th>
+              <th>Address</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Payment Method</th>
+              <th>Order Date</th>
+              <th>Product Details</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(order => { %>
+              <tr>
+                <td><%= order.orderNumber %></td>
+                <td><%= order.buyer %></td>
+                <td><%= order.address %></td>
+                <td>Rs: <%= order.total %></td>
+                <td><%= order.status %></td>
+                <td><%= order.paymentMethod %></td>
+                <td><%= new Date(order.createdAt).toISOString().split('T')[0] %></td>
+                <td>
+                  <ul>
+                    <% order.items.forEach(item => { %>
+                      <li>
+                        <strong>Product Name:</strong> <%= item.product_name %>
+                        <br />
+                        <strong>Quantity:</strong> <%= item.quantity %>
+                      </li>
+                    <% }); %>
+                  </ul>
+                </td>
+                <td>
+                  <% if (order.status === 'Pending') { %>
+                    <form action="/orders/updateStatus" method="POST">
+                      <input type="hidden" name="orderId" value="<%= order._id %>">
+                      <input type="hidden" name="newStatus" value="Delivered">
+                      <button type="submit">Mark as Delivered</button>
+                    </form>
+                    <% } else { %>
+                      <span>No actions</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+            <div class="pagination-container">
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                  <a href="/admin/Orders?page=<%= i %>" class="pagination-button<% if (currentPage === i) { %> active<% } %>"><%= i %></a>
+                <% } %>
+              </div>
+
+      </div>
+    </div>
+    <script>
+          function redirectToCategory(){
+        window.location.href = "/admin/category";
+    }
+    function redirectToProducts() {
+      window.location.href = "/admin/Products";
+    }
+    function redirectToUsers() {
+      window.location.href = "/admin/Users";
+    }
+
+    function redirectToOrders() {
+      window.location.href = "/admin/orders";
+    }
+   
+    function redirectToDash() {
+      window.location.href = "/admin";
+    }
+    function redirectToCoupons() {
+      window.location.href = "/admin/coupon";
+    }
+   
+   
+    function redirectToBanner() {
+      window.location.href = "/admin/banner";
+    }
+
+    </script>
+  </body>
+</html>
