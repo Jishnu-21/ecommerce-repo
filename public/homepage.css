@@ -156,15 +156,17 @@
   }
   .copy-component {
     position: absolute;
-    top: 77px;
-    left: 360px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 720px;
     flex-direction: column;
     justify-content: center;
     gap: var(--gap-21xl);
     min-width: 304px;
     max-width: 720px;
-  }
+}
+
   .unsplash9xngoipxceo-parent {
     position: absolute;
     top: 53px;
@@ -403,7 +405,6 @@
   .group-parent {
     display: flex;
     flex-wrap: wrap;
-    background-color: var(--color-whitesmoke-100);
     justify-content: space-between;
     max-width: 720px; /* Adjust as needed */
     margin: 15px auto; /* Center the grid */
