@@ -266,6 +266,24 @@
         </table>
       </div>
 
+      <div class="monthly-sale2">
+        <div class="month-selector">
+          <a>Top selling categories</a>
+            <label for="monthSelect">Select Month:</label>
+            <select id="monthSelect">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <!-- Add options for all months as needed -->
+            </select>
+            <button id="fetchDataButton">Fetch Data</button>
+          </div>
+        <div class="statistic-chart">
+            <canvas id="topSellingCategoriesChart"  width="800" height="400"></canvas>
+        </div>
+    </div>
+    
+    
     
 
       <div class="top-category">
@@ -461,7 +479,60 @@ document.getElementById('downloadform').addEventListener('submit', function(e) {
     window.location.href = `/sales-report/download?startDate=${startDate}&endDate=${endDate}`;
 });
 
+// Add event listener for the fetch data button click
+document.getElementById('fetchDataButton').addEventListener('click', function() {
+    const selectedMonth = document.getElementById('monthSelect').value;
+    fetchChartData2(`/api/bar-chart?month=${selectedMonth}`);
+});
 
+// Function to fetch data and render the chart
+function fetchChartData2(url) {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log('API response data:', data);
+
+        const labels = [];
+        const dataset = [];
+
+        // Loop through the data and extract category names and total sales
+        data.forEach(item => {
+            labels.push(item._id.category);
+            dataset.push(item.totalSales);
+        });
+
+        // Destroy the existing chart if it exists
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        // Render the chart using Chart.js
+        const ctx = document.getElementById('topSellingCategoriesChart').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Sales',
+                    data: dataset,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching chart data:', error);
+    });
+}
 
 
 
