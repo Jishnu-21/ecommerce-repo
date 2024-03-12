@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --copy-button: Inter;
+    --regular-12: Poppins;
+    --text-xl-semibold: "Public Sans";
+    --rubik-48: Rubik;
+    --font-lato: Lato;
+    --open-sans-regular-16: "Open Sans";
+    --font-arial: Arial;
+    --font-arial-rounded-mt-bold: "Arial Rounded MT Bold";
+    --font-roboto: Roboto;
+  
+    /* font sizes */
+    --rubik-32-size: 32px;
+    --open-sans-regular-16-size: 16px;
+    --copy-button-size: 14px;
+    --regular-12-size: 12px;
+    --rubik-24-size: 24px;
+    --open-sans-semibold-20-size: 20px;
+    --font-size-32xl: 51px;
+    --font-size-3xl: 22px;
+    --font-size-48xl: 67px;
+    --text-xl-semibold-size: 18px;
+    --rubik-48-size: 48px;
+    --font-size-17xl: 36px;
+    --font-size-3xs: 10px;
+    --display-l-semibold-size: 28px;
+    --font-size-smi: 13px;
+    --font-size-2xs: 11px;
+    --font-size-19xl: 38px;
+  
+    /* Colors */
+    --white: #fff;
+    --colors-secondary: #f5f1e9;
+    --color-gray-100: #fbfbfb;
+    --color-gray-200: #fafafa;
+    --neutral-black-black-300: #777980;
+    --color-gray-300: #7b7878;
+    --heading1: #2a2929;
+    --dark-gray: #232321;
+    --heading: #202321;
+    --neutral-black-black-500: #1d1f2c;
+    --colors-accent: #14110b;
+    --color-gray-400: #101010;
+    --color-gray-500: #070b15;
+    --color-gray-600: #030303;
+    --color-silver-100: #cbbebe;
+    --dark-grey-2: #bcbcbc;
+    --color-silver-200: #bbb;
+    --color-darkslategray-100: #475569;
+    --neutral-black-black-400: #4a4c56;
+    --content: #474747;
+    --dominenent: #3e3e3e;
+    --heading2: #3b3b3b;
+    --color-whitesmoke-100: #f9fafb;
+    --color-whitesmoke-200: #f8f8f8;
+    --color-whitesmoke-300: #f5f5f4;
+    --neutral-gray-gray-50: #f0f1f3;
+    --color-whitesmoke-400: #f0f0f0;
+    --color-whitesmoke-500: #eee;
+    --wh-content: #ececec;
+    --color-whitesmoke-600: #ecebeb;
+    --wh-heading: #f2fff5;
+    --color-honeydew-100: #e7f7ee;
+    --neutral-gray-gray-500: #667085;
+    --secondary-green-green-50: #e9faf7;
+    --color-azure-100: #e6f6f4;
+    --secondary-green-green-600: #1a9882;
+    --color-black: #000;
+    --color-snow-100: #fff9f9;
+    --color-snow-200: #fff8f8;
+    --color-gainsboro-100: #e7e7e7;
+    --color-gainsboro-200: #e3e7ee;
+    --color-gainsboro-300: #e0e2e7;
+    --color-green: #0d8800;
+    --secondary-red-red-50: #feecee;
+    --content1: #6d6c6c;
+    --color-firebrick: #c03636;
+    --color-royalblue: #4a69e2;
+    --neutral-gray-gray-25: #f9f9fc;
+    --neutral-gray-gray-400: #858d9d;
+    --primary-primary-50: #f4ecfb;
+    --secondary-orange-orange-50: #fff0ea;
+    --secondary-yellow-yellow-50: #fffae7;
+    --secondary-red-red-500: #eb3d4d;
+    --secondary-cyan-cyan-50: #eaf8ff;
+    --secondary-yellow-yellow-500: #f9c80e;
+    --color-darkorchid: #883dcf;
+  
+    /* Gaps */
+    --gap-0: 0px;
+    --gap-5xl: 24px;
+    --gap-9xs: 4px;
+    --gap-3xl: 22px;
+    --gap-base: 16px;
+    --gap-11xs: 2px;
+    --gap-21xl: 40px;
+    --gap-5xs: 8px;
+    --gap-113xl: 132px;
+    --gap-xs: 12px;
+    --gap-sm: 14px;
+    --gap-lg: 18px;
+    --gap-xl: 20px;
+  
+    /* Paddings */
+    --padding-29xl: 48px;
+    --padding-5xs: 8px;
+    --padding-21xl: 40px;
+    --padding-base: 16px;
+    --padding-3xs: 10px;
+    --padding-mini-5: 14.5px;
+    --padding-xl: 20px;
+    --padding-5xl: 24px;
+    --padding-11xs: 2px;
+    --padding-lg: 18px;
+    --padding-3xl: 22px;
+    --padding-sm: 14px;
+    --padding-45xl: 64px;
+    --padding-17xl: 36px;
+    --padding-37xl: 56px;
+    --padding-101xl: 120px;
+    --padding-41xl: 60px;
+    --padding-xs: 12px;
+    --padding-9xs: 4px;
+    --padding-81xl: 100px;
+    --padding-2xs: 11px;
+    --padding-mini: 15px;
+    --padding-61xl: 80px;
+  
+    /* Border radiuses */
+    --br-5xs: 8px;
+    --br-base: 16px;
+    --br-xs: 12px;
+    --br-7xs: 6px;
+    --br-9xs: 4px;
+    --br-11xs: 2px;
+    --br-xl: 20px;
+    --br-21xl: 40px;
+    --br-81xl: 100px;
+    --br-3xs: 10px;
+    --br-6xs: 7px;
+    --br-13xl: 32px;
+  
+    /* Effects */
+    --card-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.03);
+    --shadow: 0px 4px 47px 10px rgba(0, 0, 0, 0.05);
+    --soft-shadow: 0px 4px 30px rgba(46, 45, 116, 0.05);
+    --nav: 0px 4px 20px rgba(7, 42, 200, 0.05);
+  }
+  
