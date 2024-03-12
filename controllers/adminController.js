@@ -824,6 +824,7 @@ const downloadSales = async (req, res) => {
 }
 
 
+
   const salesAggregationPipeline = [
     { $unwind: "$items" },
     // Assuming a correct lookup to bring in product prices
@@ -896,6 +897,48 @@ function constructTimePeriod(id, interval) {
       return 'Unknown Period';
   }
 }
+
+
+const barChart = async (req, res) => {
+  try {
+      const selectedMonth = parseInt(req.query.month); // Parse the selected month from the query string
+
+      const topSellingCategoriesMonthly = await Order.aggregate([
+          // Match orders based on the selected month
+          {
+              $match: {
+                  createdAt: {
+                      $gte: new Date(new Date().getFullYear(), selectedMonth - 1, 1),
+                      $lt: new Date(new Date().getFullYear(), selectedMonth, 0)
+                  }
+              }
+          },
+          // Unwind the items array
+          { $unwind: '$items' },
+          // Lookup to match categoryName from Product model
+          { $lookup: {
+              from: 'products',
+              localField: 'items.product_id',
+              foreignField: '_id',
+              as: 'product'
+          }},
+          // Unwind the product array
+          { $unwind: '$product' },
+          // Group by category and month
+          { $group: {
+              _id: { category: '$product.categoryName', month: { $month: '$createdAt' } },
+              totalSales: { $sum: '$items.quantity' }
+          }},
+          { $sort: { '_id.month': 1 } }
+      ]);
+
+      res.json(topSellingCategoriesMonthly);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 
 
 
@@ -1052,6 +1095,7 @@ module.exports = {
   downloadCustomDateSalesReport,
   getCustomDateSalesReport,
     renderAdminPage,
+    barChart,
     updateStatus,
     updateUserStatus,
     renderBanner,
