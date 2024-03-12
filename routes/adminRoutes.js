@@ -16,6 +16,7 @@ router.post('/product/status', updateProductStatus);
 router.post('/product/approval', adminController.productApproval);
 router.post('/product/delete', adminController.productDelete);
 
+router.get('/api/bar-chart',adminController.barChart)
 
 router.post('/admin/status', updateUserStatus);
 router.post('/category/status', updateCategoryStatus);
